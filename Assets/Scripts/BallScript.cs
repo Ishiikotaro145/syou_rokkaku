@@ -13,7 +13,7 @@ public class BallScript : MonoBehaviour
     {
         float remainTime = Time.deltaTime;
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, BallSize, speed,
-            speed.magnitude * remainTime);
+			speed.magnitude * remainTime,~(1<<8));
         int count = 0;
         while (hit.collider != null && count < 3)
         {
