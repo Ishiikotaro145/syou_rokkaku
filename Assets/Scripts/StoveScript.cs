@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class StoveScript : MonoBehaviour
 {
+    public static StoveScript instance;
     private Vector2 mousePositionOld;
 
     // Use this for initialization
     void Start()
     {
+        instance = this;
     }
 
     // Update is called once per frame
@@ -29,5 +31,10 @@ public class StoveScript : MonoBehaviour
 
             mousePositionOld = mousePosition;
         }
+    }
+
+    public void Reset()
+    {
+        gameObject.transform.rotation = Quaternion.identity;
     }
 }

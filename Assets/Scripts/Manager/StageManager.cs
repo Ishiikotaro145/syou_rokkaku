@@ -32,6 +32,7 @@ public class StageManager : SingletonBase<StageManager> {
 
 	List<GameObject> SelectStageList = new List<GameObject>();
 
+	private bool gameStart;
 	int nowStage = -1;
 	int nowWave = 0;
 	int maxWaveCnt = 0;
@@ -48,56 +49,55 @@ public class StageManager : SingletonBase<StageManager> {
 	}
 
 
-	// Use this for initialization
-	void Start () {
-		nowStage = (int)STAGE.STAGE1_1;
-		switch(nowStage)
+	public void GameStart()
+	{
+		if (!gameStart)
 		{
-		case (int)STAGE.STAGE1_1:
-			maxWaveCnt = pStage1_1.Count;
-			StageCopy (pStage1_1);
-			break;
-		case (int)STAGE.STAGE1_2:
-			maxWaveCnt = pStage1_2.Count;
-			StageCopy (pStage1_2);
-			break;
-		case (int)STAGE.STAGE1_3:
-			maxWaveCnt = pStage1_3.Count;
-			StageCopy (pStage1_3);
-			break;
-		case (int)STAGE.STAGE2_1:
-			maxWaveCnt = pStage2_1.Count;
-			StageCopy (pStage2_1);
-			break;
-		case (int)STAGE.STAGE2_2:
-			maxWaveCnt = pStage2_2.Count;
-			StageCopy (pStage2_2);
-			break;
-		case (int)STAGE.STAGE2_3:
-			maxWaveCnt = pStage2_3.Count;
-			StageCopy (pStage2_3);
-			break;
-		case (int)STAGE.STAGE3_1:
-			maxWaveCnt = pStage3_1.Count;
-			StageCopy (pStage3_1);
-			break;
-		case (int)STAGE.STAGE3_2:
-			maxWaveCnt = pStage3_2.Count;
-			StageCopy (pStage3_2);
-			break;
-		case (int)STAGE.STAGE3_3:
-			maxWaveCnt = pStage3_3.Count;
-			StageCopy (pStage3_3);
-			break;
+			gameStart = true;
+			nowStage = (int)STAGE.STAGE1_1;
+			switch(nowStage)
+			{
+				case (int)STAGE.STAGE1_1:
+					maxWaveCnt = pStage1_1.Count;
+					StageCopy (pStage1_1);
+					break;
+				case (int)STAGE.STAGE1_2:
+					maxWaveCnt = pStage1_2.Count;
+					StageCopy (pStage1_2);
+					break;
+				case (int)STAGE.STAGE1_3:
+					maxWaveCnt = pStage1_3.Count;
+					StageCopy (pStage1_3);
+					break;
+				case (int)STAGE.STAGE2_1:
+					maxWaveCnt = pStage2_1.Count;
+					StageCopy (pStage2_1);
+					break;
+				case (int)STAGE.STAGE2_2:
+					maxWaveCnt = pStage2_2.Count;
+					StageCopy (pStage2_2);
+					break;
+				case (int)STAGE.STAGE2_3:
+					maxWaveCnt = pStage2_3.Count;
+					StageCopy (pStage2_3);
+					break;
+				case (int)STAGE.STAGE3_1:
+					maxWaveCnt = pStage3_1.Count;
+					StageCopy (pStage3_1);
+					break;
+				case (int)STAGE.STAGE3_2:
+					maxWaveCnt = pStage3_2.Count;
+					StageCopy (pStage3_2);
+					break;
+				case (int)STAGE.STAGE3_3:
+					maxWaveCnt = pStage3_3.Count;
+					StageCopy (pStage3_3);
+					break;
+			}
+			nowWave = 0;
+			Debug.Log ("ステージマネージャーStart");
 		}
-		nowWave = 0;
-		Debug.Log ("ステージマネージャーStart");
-
-
-
-
 	}
-
 
 
 
