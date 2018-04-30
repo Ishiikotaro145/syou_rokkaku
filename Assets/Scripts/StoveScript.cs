@@ -7,6 +7,7 @@ public class StoveScript : MonoBehaviour
     public static StoveScript instance;
     private Vector2 mousePositionOld;
 
+    private bool gameStart;
     // Use this for initialization
     void Start()
     {
@@ -16,6 +17,7 @@ public class StoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameStart) return;
         if (Input.GetMouseButtonDown(0))
         {
             mousePositionOld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -36,5 +38,11 @@ public class StoveScript : MonoBehaviour
     public void Reset()
     {
         gameObject.transform.rotation = Quaternion.identity;
+        gameStart = false;
+    }
+
+    public void GameStart()
+    {
+        gameStart = true;
     }
 }

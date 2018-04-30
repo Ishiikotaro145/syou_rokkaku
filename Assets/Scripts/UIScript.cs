@@ -52,8 +52,8 @@ public class UIScript : MonoBehaviour
         if (!gameStart && Input.GetMouseButtonUp(0))
         {
             tapToStart.active = false;
-            BallScript.instance.GameStart();
-            StageManager.GetInstance.GameStart();
+            StartCoroutine("GameStart");
+            
             gameStart = true;
         }
     }
@@ -71,5 +71,14 @@ public class UIScript : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("Stove");
+    }
+    
+    private IEnumerator GameStart()
+    {
+        yield return new WaitForSeconds(.5f); 
+        StageManager.GetInstance.GameStart();
+        yield return new WaitForSeconds(.5f); 
+        BallScript.instance.GameStart();
+        StoveScript.instance.GameStart();
     }
 }
