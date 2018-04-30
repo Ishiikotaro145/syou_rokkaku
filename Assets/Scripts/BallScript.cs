@@ -23,12 +23,24 @@ public class BallScript : MonoBehaviour
         if (gameStart == false) return;
         float remainTime = Time.deltaTime;
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, BallSize, speed,
-            speed.magnitude * remainTime, ~(1 << 8));
+            speed.magnitude * remainTime, ~(1 << 5));
         int count = 0;
         while (hit.collider != null && count < 3)
         {
             GameObject o = hit.collider.gameObject;
-            if (o.CompareTag("Stove"))
+            Debug.Log(o.name);
+            if (o.CompareTag("Enemy"))
+            {
+                EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
+                enemyBase.HitByPlayer();
+                if (enemyBase.isRefrect)
+                {
+                    remainTime -= hit.distance / speed.magnitude;
+                    transform.position = hit.point + hit.normal * BallSize;
+                    speed = Vector2.Reflect(speed, hit.normal);
+                }
+            }
+            else if (o.CompareTag("Stove"))
             {
                 remainTime -= hit.distance / speed.magnitude;
                 transform.position = hit.point + hit.normal * BallSize;

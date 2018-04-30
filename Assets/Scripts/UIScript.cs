@@ -70,7 +70,7 @@ public class UIScript : MonoBehaviour
     private IEnumerator NextScene()
     {
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("Stove");
+        SceneManager.LoadScene("StageSelect");
     }
     
     private IEnumerator GameStart()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageSelect : MonoBehaviour {
 
@@ -19,8 +20,7 @@ public class StageSelect : MonoBehaviour {
 
 	public void ButtonTap(int _Stage)
 	{
-		//フェード処理
-
+		//フェード処理 
 
 
 
