@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.XR.WSA.Persistence;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -17,8 +19,7 @@ public class EnemyBase : MonoBehaviour
 
     //アニメーションが無いため仮　それっぽく魅せる演出用の変数
     float addScale = 3.0f;
-    float alpha = 1.0f;
-    private CircleCollider2D _circleCollider2D;
+    float alpha = 1.0f; 
 
     // Use this for initialization
     void Start()
@@ -27,14 +28,12 @@ public class EnemyBase : MonoBehaviour
 
         //マネージャーにスポーンしたことを伝える
         EnemyManager.GetInstance.TellSpawn();
-        _circleCollider2D = GetComponent<CircleCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
         SpawnAnime();
-
         DeadAnime();
     }
 
@@ -45,7 +44,7 @@ public class EnemyBase : MonoBehaviour
 
         //
         addScale *= 0.9f;
-        transform.localScale = new Vector3(2.0f + addScale, 2.0f + addScale, 2.0f);
+        transform.localScale = new Vector3(1.2f + addScale, 1.2f + addScale, 1.2f);
 
         if (addScale > 0.05f) return;
         isSpawnAnime = false;
@@ -63,7 +62,8 @@ public class EnemyBase : MonoBehaviour
         if (addScale > 0.05f) return;
 
         isDeadAnime = false;
-        gameObject.active = false;
+//        gameObject.active = false;
+        Destroy(gameObject);
     }
 
 
@@ -72,11 +72,11 @@ public class EnemyBase : MonoBehaviour
         //斬撃エフェクトを出す。
 
 //        Debug.Log("Damage");
-        //HP減らす処理
+        //HP減らす処理 
         hp--;
-        if (hp <= 0)
+        if (hp == 0)
         {
-            _circleCollider2D.enabled = false;
+            GetComponent<CircleCollider2D>().enabled = false; 
             isDeadAnime = true;
             EnemyManager.GetInstance.TellDead();
             addScale = 1.0f;

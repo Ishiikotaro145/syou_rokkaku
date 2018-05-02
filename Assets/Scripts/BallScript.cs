@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class BallScript : MonoBehaviour
 {
     public GameObject Slash;
     public static BallScript instance;
-    private const float BallSize = .5f;
+    private const float BallSize = .25f;
     private Vector2 speed;
     private Animator _animator;
 
@@ -35,11 +36,19 @@ public class BallScript : MonoBehaviour
                 _animator.SetTrigger("Attack");
                 Instantiate(Slash, hit.point + hit.normal * BallSize, Quaternion.identity);
                 enemyBase.HitByPlayer();
+
                 if (enemyBase.isRefrect)
                 {
                     remainTime -= hit.distance / speed.magnitude;
                     transform.position = hit.point + hit.normal * BallSize;
                     speed = Vector2.Reflect(speed, hit.normal);
+                    StopCoroutine("SlowDown");
+                    StartCoroutine("SlowDown", new[] {0.2f, 0.4f});
+                }
+                else
+                {
+                    StopCoroutine("SlowDown");
+                    StartCoroutine("SlowDown", new[] {0.4f, 0.2f});
                 }
             }
             else if (o.CompareTag("Stove"))
@@ -74,13 +83,20 @@ public class BallScript : MonoBehaviour
 
     public void Reset()
     {
-        speed = Vector2.up * 5;
+        speed = Vector2.up * 4;
         gameStart = false;
-        transform.position = new Vector2(0, -2.1f);
+        transform.position = new Vector2(0, -4.5f);
     }
 
     public void GameStart()
     {
         gameStart = true;
+    }
+
+    IEnumerator SlowDown(float[] scaleAndDuration)
+    {
+        Time.timeScale = scaleAndDuration[0];
+        yield return new WaitForSecondsRealtime(scaleAndDuration[1]);
+        Time.timeScale = 1f;
     }
 }

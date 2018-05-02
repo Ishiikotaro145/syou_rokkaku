@@ -86,6 +86,7 @@ public class UIScript : MonoBehaviour
         StageManager.GetInstance.GameStart();
         yield return new WaitForSeconds(.5f); 
         BallScript.instance.GameStart();
+        yield return new WaitForSeconds(.5f); 
         StoveScript.instance.GameStart();
     }
 }
