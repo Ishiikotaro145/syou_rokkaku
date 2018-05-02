@@ -71,7 +71,7 @@ public class EnemyBase : MonoBehaviour
     {
         //斬撃エフェクトを出す。
 
-        Debug.Log("Damage");
+//        Debug.Log("Damage");
         //HP減らす処理
         hp--;
         if (hp <= 0)

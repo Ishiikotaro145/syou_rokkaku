@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.ComponentModel.Design;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class BallScript : MonoBehaviour
 {
+    public GameObject Slash;
     public static BallScript instance;
-    private const float BallSize = .15f;
+    private const float BallSize = .5f;
     private Vector2 speed;
+    private Animator _animator;
 
     private bool gameStart;
 //    private GameObject old;
@@ -16,6 +15,7 @@ public class BallScript : MonoBehaviour
     {
         instance = this;
         Reset();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -28,10 +28,12 @@ public class BallScript : MonoBehaviour
         while (hit.collider != null && count < 3)
         {
             GameObject o = hit.collider.gameObject;
-            Debug.Log(o.name);
+//            Debug.Log(o.name);
             if (o.CompareTag("Enemy"))
             {
                 EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
+                _animator.SetTrigger("Attack");
+                Instantiate(Slash, hit.point + hit.normal * BallSize, Quaternion.identity);
                 enemyBase.HitByPlayer();
                 if (enemyBase.isRefrect)
                 {
@@ -45,7 +47,7 @@ public class BallScript : MonoBehaviour
                 remainTime -= hit.distance / speed.magnitude;
                 transform.position = hit.point + hit.normal * BallSize;
                 speed = Vector2.Reflect(speed, hit.normal);
-                speed = speed + 0.07f * speed.normalized;
+//                speed = speed + 0.07f * speed.normalized;
 //                if (!o.Equals(old))
 //                {
 //                    UIScript.instance.ScorePlusOne();
@@ -67,11 +69,12 @@ public class BallScript : MonoBehaviour
         }
 
         transform.position += (Vector3) speed * remainTime;
+        transform.rotation = Quaternion.FromToRotation(Vector3.right, speed);
     }
 
     public void Reset()
     {
-        speed = Vector2.up * 2;
+        speed = Vector2.up * 5;
         gameStart = false;
         transform.position = new Vector2(0, -2.1f);
     }

@@ -11,6 +11,7 @@ public class UIScript : MonoBehaviour
     public GameObject hearts;
     public GameObject tapToStart;
     public GameObject gameOver;
+    public GameObject clear;
 
     private GameObject[] heartArray;
     private int score;
@@ -58,6 +59,12 @@ public class UIScript : MonoBehaviour
         }
     }
 
+    public void GameClear()
+    {
+        clear.active = true;
+        StartCoroutine("NextScene");
+    }
+
 //    public void ScorePlusOne()
 //    {
 //        text.text = (++score).ToString();
@@ -69,10 +76,10 @@ public class UIScript : MonoBehaviour
 //    }
     private IEnumerator NextScene()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f); 
         SceneManager.LoadScene("StageSelect");
     }
-    
+
     private IEnumerator GameStart()
     {
         yield return new WaitForSeconds(.5f); 
