@@ -5,9 +5,11 @@ public class BallScript : MonoBehaviour
 {
     public GameObject Slash;
     public static BallScript instance;
-    private const float BallSize = .25f;
+    private const float BallSize = .23f;
     private Vector2 speed;
+
     private Animator _animator;
+//    private Rigidbody2D _rigidbody2D;
 
     private bool gameStart;
 //    private GameObject old;
@@ -17,14 +19,16 @@ public class BallScript : MonoBehaviour
         instance = this;
         Reset();
         _animator = GetComponent<Animator>();
+//        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
         if (gameStart == false) return;
+
         float remainTime = Time.deltaTime;
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, BallSize, speed,
-            speed.magnitude * remainTime, ~(1 << 5));
+            speed.magnitude * remainTime, ~(1 << 8));
         int count = 0;
         while (hit.collider != null && count < 3)
         {
@@ -73,12 +77,39 @@ public class BallScript : MonoBehaviour
                 break;
             }
 
-            hit = Physics2D.CircleCast(transform.position, BallSize, speed, speed.magnitude * remainTime);
             count++;
+            hit = Physics2D.CircleCast(transform.position, BallSize, speed, speed.magnitude * remainTime, ~(1 << 8));
         }
 
         transform.position += (Vector3) speed * remainTime;
         transform.rotation = Quaternion.FromToRotation(Vector3.right, speed);
+
+        // Guide Line
+
+        GuideLines.instance.RemoveAll();
+        float remainLength = 20;
+        Vector2 lineSpeed = speed;
+        Vector2 linePosition = transform.position;
+        RaycastHit2D lineHit = Physics2D.CircleCast(linePosition, BallSize, lineSpeed, remainLength, 1 << 9);
+
+        while (lineHit.collider != null)
+        {
+            Debug.Log(remainLength);
+            if (remainLength < lineHit.distance) break;
+            remainLength -= lineHit.distance;
+            Vector2 newLinePosition = lineHit.point + lineHit.normal * BallSize;
+            LineRenderer lineRenderer = GuideLines.instance.GetAvailableObject().GetComponent<LineRenderer>();
+            lineRenderer.SetPositions(new[] {(Vector3) linePosition, (Vector3) newLinePosition});
+            lineRenderer.gameObject.SetActive(true);
+            linePosition = newLinePosition;
+            lineSpeed = Vector2.Reflect(lineSpeed, lineHit.normal);
+            lineHit = Physics2D.CircleCast(linePosition, BallSize, lineSpeed, remainLength, 1 << 9);
+        }
+
+        LineRenderer lineRendererEnd = GuideLines.instance.GetAvailableObject().GetComponent<LineRenderer>();
+        lineRendererEnd.SetPositions(new[]
+            {(Vector3) linePosition, (Vector3) (linePosition + lineSpeed.normalized * remainLength)});
+        lineRendererEnd.gameObject.SetActive(true);
     }
 
     public void Reset()
@@ -91,6 +122,7 @@ public class BallScript : MonoBehaviour
     public void GameStart()
     {
         gameStart = true;
+//        _rigidbody2D.velocity = 4*Vector2.up;
     }
 
     IEnumerator SlowDown(float[] scaleAndDuration)
