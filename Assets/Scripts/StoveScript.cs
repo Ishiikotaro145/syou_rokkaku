@@ -5,6 +5,7 @@ using UnityEngine;
 public class StoveScript : MonoBehaviour
 {
     public static StoveScript instance;
+    public GameObject gameStartTrigger;
     private Vector2 mousePositionOld;
 
     private bool gameStart;
@@ -39,10 +40,12 @@ public class StoveScript : MonoBehaviour
     {
         gameObject.transform.rotation = Quaternion.identity;
         gameStart = false;
+        gameStartTrigger.SetActive(true);
     }
 
     public void GameStart()
     {
         gameStart = true;
+        gameStartTrigger.SetActive(false);
     }
 }
