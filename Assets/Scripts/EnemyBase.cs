@@ -44,7 +44,7 @@ public class EnemyBase : MonoBehaviour
 
         //
         addScale *= 0.9f;
-        transform.localScale = new Vector3(1.2f + addScale, 1.2f + addScale, 1.2f);
+        transform.localScale = new Vector3(1.5f + addScale, 1.5f + addScale, 1.5f);
 
         if (addScale > 0.05f) return;
         isSpawnAnime = false;
