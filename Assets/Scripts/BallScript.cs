@@ -87,7 +87,7 @@ public class BallScript : MonoBehaviour
         // Guide Line
 
         GuideLines.instance.RemoveAll();
-        float remainLength = 20;
+        float remainLength = 5;
         Vector2 lineSpeed = speed;
         Vector2 linePosition = transform.position;
         RaycastHit2D lineHit = Physics2D.CircleCast(linePosition, BallSize, lineSpeed, remainLength, 1 << 9);
@@ -100,6 +100,7 @@ public class BallScript : MonoBehaviour
             Vector2 newLinePosition = lineHit.point + lineHit.normal * BallSize;
             LineRenderer lineRenderer = GuideLines.instance.GetAvailableObject().GetComponent<LineRenderer>();
             lineRenderer.SetPositions(new[] {(Vector3) linePosition, (Vector3) newLinePosition});
+            lineRenderer.material.mainTextureScale = new Vector2(lineHit.distance * 5.2f, 1);
             lineRenderer.gameObject.SetActive(true);
             linePosition = newLinePosition;
             lineSpeed = Vector2.Reflect(lineSpeed, lineHit.normal);
@@ -109,6 +110,7 @@ public class BallScript : MonoBehaviour
         LineRenderer lineRendererEnd = GuideLines.instance.GetAvailableObject().GetComponent<LineRenderer>();
         lineRendererEnd.SetPositions(new[]
             {(Vector3) linePosition, (Vector3) (linePosition + lineSpeed.normalized * remainLength)});
+        lineRendererEnd.material.mainTextureScale = new Vector2(remainLength * 5.2f, 1);
         lineRendererEnd.gameObject.SetActive(true);
     }
 
