@@ -10,11 +10,14 @@ public class GuideLines : MonoBehaviour
     private List<GameObject> pool;
     public GameObject linePrefab;
 
+    void Awake()
+    {
+        instance = this;
+    }
 
     // Use this for initialization
     private void Start()
     {
-        instance = this;
         pool = new List<GameObject>();
         for (int i = 0; i < initialPoolSize; i++) pool.Add(Instantiate(linePrefab, transform));
     }
@@ -32,6 +35,7 @@ public class GuideLines : MonoBehaviour
 
     public void RemoveAll()
     {
+        if (pool == null) return;
         foreach (GameObject go in pool)
             go.SetActive(false);
     }

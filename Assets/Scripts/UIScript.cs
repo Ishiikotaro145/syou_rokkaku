@@ -18,10 +18,14 @@ public class UIScript : MonoBehaviour
     private int life = 3;
     private bool gameStart;
 
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
         instance = this;
+    }
+    
+    // Use this for initialization
+    void Start()
+    { 
         heartArray = new[]
         {
             hearts.transform.GetChild(0).gameObject, hearts.transform.GetChild(1).gameObject,
@@ -86,7 +90,5 @@ public class UIScript : MonoBehaviour
         StageManager.GetInstance.GameStart();
         yield return new WaitForSeconds(.5f); 
         BallScript.instance.GameStart();
-        yield return new WaitForSeconds(.5f); 
-        StoveScript.instance.GameStart();
     }
 }

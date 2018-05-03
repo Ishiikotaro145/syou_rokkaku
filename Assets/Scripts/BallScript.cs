@@ -8,18 +8,18 @@ public class BallScript : MonoBehaviour
     private const float BallSize = .23f;
     private Vector2 speed;
 
-    private Animator _animator;
-//    private Rigidbody2D _rigidbody2D;
+    private Animator _animator; 
 
     private bool gameStart;
-//    private GameObject old;
 
-    private void Start()
+    void Awake()
     {
         instance = this;
-        Reset();
-        _animator = GetComponent<Animator>();
-//        _rigidbody2D = GetComponent<Rigidbody2D>();
+    }
+    private void Start()
+    { 
+        _animator = GetComponent<Animator>(); 
+        Reset(); 
     }
 
     private void Update()
@@ -60,17 +60,16 @@ public class BallScript : MonoBehaviour
                 remainTime -= hit.distance / speed.magnitude;
                 transform.position = hit.point + hit.normal * BallSize;
                 speed = Vector2.Reflect(speed, hit.normal);
-//                speed = speed + 0.07f * speed.normalized;
-//                if (!o.Equals(old))
-//                {
-//                    UIScript.instance.ScorePlusOne();
-//                    old = o;
-//                }
+//                speed = speed + 0.07f * speed.normalized; 
             }
             else if (o.CompareTag("StoveMouth"))
             {
                 UIScript.instance.LifeLoss();
                 break;
+            }
+            else if(o.CompareTag("GameStart"))
+            { 
+                StoveScript.instance.GameStart();
             }
             else
             {
@@ -94,7 +93,7 @@ public class BallScript : MonoBehaviour
 
         while (lineHit.collider != null)
         {
-            Debug.Log(remainLength);
+//            Debug.Log(remainLength);
             if (remainLength < lineHit.distance) break;
             remainLength -= lineHit.distance;
             Vector2 newLinePosition = lineHit.point + lineHit.normal * BallSize;
@@ -119,12 +118,12 @@ public class BallScript : MonoBehaviour
         speed = Vector2.up * 4;
         gameStart = false;
         transform.position = new Vector2(0, -4.5f);
+        GuideLines.instance.RemoveAll();
     }
 
     public void GameStart()
     {
-        gameStart = true;
-//        _rigidbody2D.velocity = 4*Vector2.up;
+        gameStart = true; 
     }
 
     IEnumerator SlowDown(float[] scaleAndDuration)
