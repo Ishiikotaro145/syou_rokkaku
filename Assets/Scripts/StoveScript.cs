@@ -9,6 +9,9 @@ public class StoveScript : MonoBehaviour
     private Vector2 mousePositionOld;
 
     private bool gameStart;
+
+    private bool gameReset = true;
+
     // Use this for initialization
     void Start()
     {
@@ -22,14 +25,20 @@ public class StoveScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             mousePositionOld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (mousePositionOld.y < -0)
+                gameReset = false;
         }
         else if (Input.GetMouseButton(0))
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (mousePositionOld.y < -0 && mousePosition.y < -0)
+            if (mousePosition.y < -0)
             {
-                Quaternion rotation = Quaternion.FromToRotation(mousePositionOld, mousePosition);
-                gameObject.transform.rotation = gameObject.transform.rotation * rotation;
+                if (!gameReset)
+                {
+                    Quaternion rotation = Quaternion.FromToRotation(mousePositionOld, mousePosition);
+                    gameObject.transform.rotation = gameObject.transform.rotation * rotation;
+                }
+                else gameReset = false;
             }
 
             mousePositionOld = mousePosition;
@@ -40,6 +49,7 @@ public class StoveScript : MonoBehaviour
     {
         gameObject.transform.rotation = Quaternion.identity;
         gameStart = false;
+        gameReset = true;
         gameStartTrigger.SetActive(true);
     }
 

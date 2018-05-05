@@ -52,7 +52,7 @@ public class StageManager : SingletonBase<StageManager>
         if (!gameStart)
         {
             gameStart = true;
-            nowStage = (int) STAGE.STAGE1_1;
+			nowStage = PlayerPrefs.GetInt ("StageSelect");
             switch (nowStage)
             {
                 case (int) STAGE.STAGE1_1:
@@ -126,7 +126,7 @@ public class StageManager : SingletonBase<StageManager>
 
     public void NextWave()
     {
-        Debug.Log("waveeeeeeeeeeeee   "+nowWave);
+        Debug.Log("wave   "+nowWave);
         if (nowWave >= maxWaveCnt)
         {
             UIScript.instance.GameClear();

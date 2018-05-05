@@ -7,6 +7,9 @@ public class EnemyBase : MonoBehaviour
     public bool isRefrect; //反射するか
     public int exp;
     int enemyID;
+    private int currentHP;
+    private Transform hpBar;
+    private bool startFinish;
 
 
     //演出周りで必要な変数
@@ -15,7 +18,7 @@ public class EnemyBase : MonoBehaviour
 
     //アニメーションが無いため仮　それっぽく魅せる演出用の変数
     float addScale = 3.0f;
-    float alpha = 1.0f; 
+    float alpha = 1.0f;
 
     // Use this for initialization
     void Start()
@@ -24,6 +27,14 @@ public class EnemyBase : MonoBehaviour
 
         //マネージャーにスポーンしたことを伝える
         EnemyManager.GetInstance.TellSpawn();
+        currentHP = hp;
+        hpBar = transform.GetChild(1);
+        if (hp == 1)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+            transform.GetChild(1).gameObject.SetActive(false);
+        }
+ 
     }
 
     // Update is called once per frame
@@ -39,11 +50,12 @@ public class EnemyBase : MonoBehaviour
         if (isSpawnAnime == false) return;
 
         //
-        addScale *= 0.9f;
+        addScale *= 0.8f;
         transform.localScale = new Vector3(1.5f + addScale, 1.5f + addScale, 1.5f);
 
         if (addScale > 0.05f) return;
         isSpawnAnime = false;
+        startFinish = true;
     }
 
 
@@ -63,19 +75,23 @@ public class EnemyBase : MonoBehaviour
     }
 
 
-    public void HitByPlayer()
+    public bool HitByPlayer()
     {
+        if (!startFinish) return false;
         //斬撃エフェクトを出す。
 
 //        Debug.Log("Damage");
         //HP減らす処理 
-        hp--;
-        if (hp == 0)
+        currentHP--;
+        hpBar.localScale = new Vector2(0.08f * currentHP / hp, 0.12f);
+        if (currentHP == 0)
         {
-            GetComponent<CircleCollider2D>().enabled = false; 
+            GetComponent<CircleCollider2D>().enabled = false;
             isDeadAnime = true;
             EnemyManager.GetInstance.TellDead();
             addScale = 1.0f;
         }
+
+        return true;
     }
 }
