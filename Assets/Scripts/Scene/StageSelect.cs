@@ -21,7 +21,7 @@ public class StageSelect : MonoBehaviour {
 	public void ButtonTap(int _Stage)
 	{
 		//フェード処理 
-
+		PlayerPrefs.SetInt("StageSelect",_Stage);
 
 
 
