@@ -4,28 +4,21 @@ using UnityEngine;
 public class BallScript : MonoBehaviour
 {
     public GameObject Slash;
-    public static BallScript instance;
+    public GameObject ShockWave;
     private const float BallSize = .23f;
-    private Vector2 speed;
+    private Vector2 speed = Vector2.up * 4;
 
-    private Animator _animator; 
+    private Animator _animator;
 
     private bool gameStart;
 
-    void Awake()
-    {
-        instance = this;
-    }
     private void Start()
-    { 
-        _animator = GetComponent<Animator>(); 
-        Reset(); 
+    {
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if (gameStart == false) return;
-
         float remainTime = Time.deltaTime;
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, BallSize, speed,
             speed.magnitude * remainTime, ~(1 << 8));
@@ -38,8 +31,9 @@ public class BallScript : MonoBehaviour
             {
                 EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
                 _animator.SetTrigger("Attack");
-                Instantiate(Slash, hit.point + hit.normal * BallSize, Quaternion.identity);
-                enemyBase.HitByPlayer();
+
+                if (enemyBase.HitByPlayer())
+                    Instantiate(Slash, hit.point + hit.normal * BallSize, Quaternion.identity);
 
                 if (enemyBase.isRefrect)
                 {
@@ -67,8 +61,8 @@ public class BallScript : MonoBehaviour
                 UIScript.instance.LifeLoss();
                 break;
             }
-            else if(o.CompareTag("GameStart"))
-            { 
+            else if (o.CompareTag("GameStart"))
+            {
                 StoveScript.instance.GameStart();
             }
             else
@@ -113,23 +107,17 @@ public class BallScript : MonoBehaviour
         lineRendererEnd.gameObject.SetActive(true);
     }
 
-    public void Reset()
-    {
-        speed = Vector2.up * 4;
-        gameStart = false;
-        transform.position = new Vector2(0, -4.5f);
-        GuideLines.instance.RemoveAll();
-    }
-
-    public void GameStart()
-    {
-        gameStart = true; 
-    }
 
     IEnumerator SlowDown(float[] scaleAndDuration)
     {
         Time.timeScale = scaleAndDuration[0];
         yield return new WaitForSecondsRealtime(scaleAndDuration[1]);
         Time.timeScale = 1f;
+    }
+
+    public void CreateShokeWave()
+    {
+        Instantiate(ShockWave, transform.position, transform.rotation).GetComponent<ShockWaveScript>()
+            .SetSpeed(2 * speed);
     }
 }
