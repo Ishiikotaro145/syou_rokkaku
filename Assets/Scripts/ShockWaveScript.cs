@@ -4,68 +4,44 @@ using UnityEngine;
 
 public class ShockWaveScript : MonoBehaviour
 {
-    private Vector3 speed;
-    private const float BallSize = .3f;
-
-    private bool move;
+    private Rigidbody2D _rigidbody2D;
 
     // Use this for initialization
     void Start()
     {
 //        StartCoroutine("Damage");
         StartCoroutine("Remove");
+        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        if (!move)return;
-        float remainTime = Time.deltaTime;
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, BallSize, speed,
-            speed.magnitude * remainTime, ~(1 << 8));
-        int count = 0;
-        while (hit.collider != null && count < 3)
-        {
-            GameObject o = hit.collider.gameObject;
-//            Debug.Log(o.name);
-            if (o.CompareTag("Enemy"))
-            {
-                EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>(); 
-                enemyBase.HitByPlayer();
-
-                if (enemyBase.isRefrect)
-                {
-                    remainTime -= hit.distance / speed.magnitude;
-                    transform.position = hit.point + hit.normal * BallSize;
-                    speed = Vector2.Reflect(speed, hit.normal); 
-                } 
-            }
-            else if (o.CompareTag("Stove"))
-            {
-                remainTime -= hit.distance / speed.magnitude;
-                transform.position = hit.point + hit.normal * BallSize;
-                speed = Vector2.Reflect(speed, hit.normal);
-//                speed = speed + 0.07f * speed.normalized; 
-            } 
-            else
-            {
-                break;
-            }
-
-            count++;
-            hit = Physics2D.CircleCast(transform.position, BallSize, speed, speed.magnitude * remainTime, ~(1 << 8));
-        }
-
-        transform.position += (Vector3) speed * remainTime;
-        transform.rotation = Quaternion.FromToRotation(Vector3.right, speed);
+        transform.rotation = Quaternion.FromToRotation(Vector3.right, _rigidbody2D.velocity);
     }
 
     public void SetSpeed(Vector3 speed)
     {
-        this.speed = speed;
-        move = true;
+        GetComponent<Rigidbody2D>().velocity = speed;
     }
 
+    void OnTriggerEnter2D(Collider2D o)
+    {
+        if (o.CompareTag("Enemy"))
+        {
+            EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
+            enemyBase.HitByPlayer();
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D o)
+    {
+        if (o.collider.CompareTag("Enemy"))
+        {
+            EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
+            enemyBase.HitByPlayer();
+        }
+    }
 //    IEnumerator Damage()
 //    {
 //        while (true)

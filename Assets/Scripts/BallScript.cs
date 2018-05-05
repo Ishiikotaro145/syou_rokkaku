@@ -5,8 +5,8 @@ public class BallScript : MonoBehaviour
 {
     public GameObject Slash;
     public GameObject ShockWave;
-    private const float BallSize = .23f;
-    private Vector2 speed = Vector2.up * 4;
+    private const float BallSize = .28f;
+    private Rigidbody2D _rigidbody2D;
 
     private Animator _animator;
 
@@ -15,73 +15,56 @@ public class BallScript : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D.velocity = Vector2.up * 4;
     }
 
-    private void Update()
+    void OnTriggerEnter2D(Collider2D o)
     {
-        float remainTime = Time.deltaTime;
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, BallSize, speed,
-            speed.magnitude * remainTime, ~(1 << 8));
-        int count = 0;
-        while (hit.collider != null && count < 3)
+        if (o.CompareTag("Enemy"))
         {
-            GameObject o = hit.collider.gameObject;
-//            Debug.Log(o.name);
-            if (o.CompareTag("Enemy"))
-            {
-                EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
-                _animator.SetTrigger("Attack");
+            EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
+            _animator.SetTrigger("Attack");
 
-                if (enemyBase.HitByPlayer())
-                    Instantiate(Slash, hit.point + hit.normal * BallSize, Quaternion.identity);
+            if (enemyBase.HitByPlayer()) Instantiate(Slash, o.transform.position, Quaternion.identity);
 
-                if (enemyBase.isRefrect)
-                {
-                    remainTime -= hit.distance / speed.magnitude;
-                    transform.position = hit.point + hit.normal * BallSize;
-                    speed = Vector2.Reflect(speed, hit.normal);
-                    StopCoroutine("SlowDown");
-                    StartCoroutine("SlowDown", new[] {0.2f, 0.4f});
-                }
-                else
-                {
-                    StopCoroutine("SlowDown");
-                    StartCoroutine("SlowDown", new[] {0.4f, 0.2f});
-                }
-            }
-            else if (o.CompareTag("Stove"))
-            {
-                remainTime -= hit.distance / speed.magnitude;
-                transform.position = hit.point + hit.normal * BallSize;
-                speed = Vector2.Reflect(speed, hit.normal);
-//                speed = speed + 0.07f * speed.normalized; 
-            }
-            else if (o.CompareTag("StoveMouth"))
-            {
-                UIScript.instance.LifeLoss();
-                break;
-            }
-            else if (o.CompareTag("GameStart"))
-            {
-                StoveScript.instance.GameStart();
-            }
-            else
-            {
-                break;
-            }
-
-            count++;
-            hit = Physics2D.CircleCast(transform.position, BallSize, speed, speed.magnitude * remainTime, ~(1 << 8));
+            StopCoroutine("SlowDown");
+            StartCoroutine("SlowDown", new[] {0.4f, 0.2f});
         }
+        else if (o.CompareTag("StoveMouth"))
+        {
+            UIScript.instance.LifeLoss();
+        }
+        else if (o.CompareTag("GameStart"))
+        {
+            StoveScript.instance.GameStart();
+        }
+    }
 
-        transform.position += (Vector3) speed * remainTime;
-        transform.rotation = Quaternion.FromToRotation(Vector3.right, speed);
+    void OnCollisionEnter2D(Collision2D o)
+    {
+        if (o.collider.CompareTag("Enemy"))
+        {
+            EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
+            _animator.SetTrigger("Attack");
+
+            if (enemyBase.HitByPlayer())
+                Instantiate(Slash, o.transform.position, Quaternion.identity);
+
+            StopCoroutine("SlowDown");
+            StartCoroutine("SlowDown", new[] {0.2f, 0.4f});
+        }
+    }
+
+    void LateUpdate()
+    {
+        transform.rotation = Quaternion.FromToRotation(Vector3.right, _rigidbody2D.velocity);
 
         // Guide Line
 
         GuideLines.instance.RemoveAll();
         float remainLength = 5;
-        Vector2 lineSpeed = speed;
+        Vector2 lineSpeed = _rigidbody2D.velocity;
         Vector2 linePosition = transform.position;
         RaycastHit2D lineHit = Physics2D.CircleCast(linePosition, BallSize, lineSpeed, remainLength, 1 << 9);
 
@@ -118,6 +101,6 @@ public class BallScript : MonoBehaviour
     public void CreateShokeWave()
     {
         Instantiate(ShockWave, transform.position, transform.rotation).GetComponent<ShockWaveScript>()
-            .SetSpeed(2 * speed);
+            .SetSpeed(2 * _rigidbody2D.velocity);
     }
 }
