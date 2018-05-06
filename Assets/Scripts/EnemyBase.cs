@@ -4,7 +4,7 @@ public class EnemyBase : MonoBehaviour
 {
     //エネミーのパラメータ
     public int hp; //敵のHP
-    public bool isRefrect; //反射するか
+//    public bool isRefrect; //反射するか
     public int exp;
     int enemyID;
     private int currentHP;
