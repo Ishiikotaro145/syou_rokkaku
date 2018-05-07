@@ -1,0 +1,19 @@
+To implement the Spine animation, you need to incorporate a spine-runtimes to Unity.
+Below, sorry to trouble you, but, I will check please.
+
+Please check the "link" for Spine.
+
+--Quote--
+
+[Official]
+-spine
+http://ja.esotericsoftware.com/
+
+[Reference]
+-spine-runtimes/spine-unity/
+https://github.com/EsotericSoftware/spine-runtimes/tree/master/spine-unity
+
+-Importing a Spine Animation
+https://www.youtube.com/watch?v=x1umSQulghA
+
+---------

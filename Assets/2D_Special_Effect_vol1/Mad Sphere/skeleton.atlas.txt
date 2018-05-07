@@ -1,0 +1,62 @@
+
+skeleton.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+effects/curcle
+  rotate: false
+  xy: 2, 90
+  size: 164, 164
+  orig: 164, 164
+  offset: 0, 0
+  index: -1
+effects/maru1
+  rotate: false
+  xy: 257, 95
+  size: 17, 17
+  orig: 17, 17
+  offset: 0, 0
+  index: -1
+effects/maru2
+  rotate: false
+  xy: 2, 52
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1
+effects/sankaku
+  rotate: false
+  xy: 412, 217
+  size: 43, 37
+  orig: 43, 43
+  offset: 0, 6
+  index: -1
+effects/sikaku
+  rotate: true
+  xy: 168, 2
+  size: 110, 87
+  orig: 110, 87
+  offset: 0, 0
+  index: -1
+effects/toge
+  rotate: false
+  xy: 168, 114
+  size: 140, 140
+  orig: 140, 140
+  offset: 0, 0
+  index: -1
+effects/uni
+  rotate: false
+  xy: 310, 149
+  size: 100, 105
+  orig: 100, 105
+  offset: 0, 0
+  index: -1
+effects/uni2
+  rotate: false
+  xy: 310, 120
+  size: 26, 27
+  orig: 26, 27
+  offset: 0, 0
+  index: -1

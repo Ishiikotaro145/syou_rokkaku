@@ -1,0 +1,41 @@
+
+skeleton.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/hanen
+  rotate: false
+  xy: 183, 185
+  size: 69, 45
+  orig: 69, 45
+  offset: 0, 0
+  index: -1
+img/inazma
+  rotate: false
+  xy: 2, 201
+  size: 179, 298
+  orig: 179, 309
+  offset: 0, 0
+  index: -1
+img/inazma02
+  rotate: true
+  xy: 183, 330
+  size: 169, 305
+  orig: 169, 313
+  offset: 0, 0
+  index: -1
+img/inazma03
+  rotate: true
+  xy: 183, 232
+  size: 96, 303
+  orig: 96, 309
+  offset: 0, 0
+  index: -1
+img/lightball
+  rotate: false
+  xy: 2, 2
+  size: 178, 197
+  orig: 178, 197
+  offset: 0, 0
+  index: -1

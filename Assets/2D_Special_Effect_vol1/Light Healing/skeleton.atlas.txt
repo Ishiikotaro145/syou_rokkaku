@@ -1,0 +1,27 @@
+
+skeleton.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+effects/curcle1
+  rotate: false
+  xy: 2, 41
+  size: 171, 78
+  orig: 193, 150
+  offset: 11, 3
+  index: -1
+effects/kira
+  rotate: false
+  xy: 175, 77
+  size: 41, 42
+  orig: 44, 44
+  offset: 2, 1
+  index: -1
+effects/ring
+  rotate: false
+  xy: 2, 2
+  size: 167, 37
+  orig: 167, 42
+  offset: 0, 0
+  index: -1
