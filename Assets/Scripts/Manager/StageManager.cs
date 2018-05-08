@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 enum STAGE : int
@@ -28,11 +29,14 @@ public class StageManager : SingletonBase<StageManager>
     public List<GameObject> pStage3_3;
 
     List<GameObject> SelectStageList = new List<GameObject>();
+    private GameObject allEnemyInStage;
 
     private bool gameStart;
     int nowStage = -1;
     int nowWave = 0;
     int maxWaveCnt = 0;
+
+    private bool enemyPassable;
 
 
     void Awake()
@@ -52,7 +56,7 @@ public class StageManager : SingletonBase<StageManager>
         if (!gameStart)
         {
             gameStart = true;
-			nowStage = PlayerPrefs.GetInt ("StageSelect");
+            nowStage = PlayerPrefs.GetInt("StageSelect");
             switch (nowStage)
             {
                 case (int) STAGE.STAGE1_1:
@@ -94,7 +98,7 @@ public class StageManager : SingletonBase<StageManager>
             }
 
             NextWave();
-            Debug.Log("ステージマネージャーStart");
+//            Debug.Log("ステージマネージャーStart");
         }
     }
 
@@ -126,7 +130,8 @@ public class StageManager : SingletonBase<StageManager>
 
     public void NextWave()
     {
-        Debug.Log("wave   "+nowWave);
+        if (allEnemyInStage != null) Destroy(allEnemyInStage);
+//        Debug.Log("wave   " + nowWave);
         if (nowWave >= maxWaveCnt)
         {
             UIScript.instance.GameClear();
@@ -134,15 +139,68 @@ public class StageManager : SingletonBase<StageManager>
         }
 
         //次のWAVEの敵を出す。
-        GameObject stageObject = (GameObject) Instantiate
+        allEnemyInStage = Instantiate
         (
             SelectStageList[nowWave],
             transform.position,
             Quaternion.identity
         );
+        if (enemyPassable)
+        {
+            EnemyBase[] enemyBases = allEnemyInStage.transform.GetComponentsInChildren<EnemyBase>();
+            foreach (var enemy in enemyBases)
+            {
+                enemy.TriggerPassableWhenNecessary();
+            }
+        }
+
         nowWave++;
 
 //				Debug.Log ("Waveエネミー生成完了");
+    }
+
+    public void TriggerEnemyPassable()
+    {
+        if (enemyPassable)
+        {
+            StopCoroutine("RestorePassable");
+            StartCoroutine("RestorePassable");
+            return;
+        }
+
+        enemyPassable = true;
+        if (allEnemyInStage != null)
+        {
+            EnemyBase[] enemyBases = allEnemyInStage.transform.GetComponentsInChildren<EnemyBase>();
+            foreach (var enemy in enemyBases)
+            {
+                enemy.TriggerPassableWhenNecessary();
+            }
+        }
+
+        StartCoroutine("RestorePassable");
+    }
+
+    IEnumerator RestorePassable()
+    {
+        yield return new WaitForSeconds(2);
+        RestorePassableImmediately();
+    }
+
+    public void RestorePassableImmediately()
+    {
+        if (!enemyPassable) return;
+        if (allEnemyInStage != null)
+        {
+            EnemyBase[] enemyBases = allEnemyInStage.transform.GetComponentsInChildren<EnemyBase>();
+            foreach (var enemy in enemyBases)
+            {
+                enemy.TriggerPassableWhenNecessary();
+            }
+        }
+
+        BallScript.instance.SetPassable(false);
+        enemyPassable = false;
     }
 
     void StageCopy(List<GameObject> _stageP)
@@ -157,6 +215,6 @@ public class StageManager : SingletonBase<StageManager>
             SelectStageList.Add(_stageP[sCnt]);
         }
 
-        Debug.Log("ステージ情報コピー完了"); 
+//        Debug.Log("ステージ情報コピー完了");
     }
 }

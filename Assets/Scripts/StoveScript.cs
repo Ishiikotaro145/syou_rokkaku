@@ -25,13 +25,13 @@ public class StoveScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             mousePositionOld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (mousePositionOld.y < -0)
+//            if (Vector2.Distance(mousePositionOld, Vector2.zero) > .5f)
                 gameReset = false;
         }
         else if (Input.GetMouseButton(0))
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (mousePosition.y < -0)
+//            if (Vector2.Distance(mousePositionOld, Vector2.zero) > .5f)
             {
                 if (!gameReset)
                 {

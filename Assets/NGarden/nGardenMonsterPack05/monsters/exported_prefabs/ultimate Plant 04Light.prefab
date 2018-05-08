@@ -7600,7 +7600,6 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: c02e6685dcb8e76498c88721f0dbc5ea, type: 2}
   - {fileID: 2100000, guid: 36de968c6764adf4ba6cafc41ef25d76, type: 2}

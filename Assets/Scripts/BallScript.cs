@@ -1,8 +1,10 @@
 ﻿using System.Collections;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class BallScript : MonoBehaviour
 {
+    public static BallScript instance;
     public GameObject Slash;
     public GameObject ShockWave;
     private const float BallSize = .28f;
@@ -11,12 +13,20 @@ public class BallScript : MonoBehaviour
     private Animator _animator;
 
     private bool gameStart;
+    private SpriteRenderer _spriteRenderer;
 
     private void Start()
     {
+        instance = this;
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+    }
+
+    public void GameStart()
+    {
         _rigidbody2D.velocity = Vector2.up * 4;
+        gameStart = true;
     }
 
     void OnTriggerEnter2D(Collider2D o)
@@ -29,16 +39,18 @@ public class BallScript : MonoBehaviour
             if (enemyBase.HitByPlayer()) Instantiate(Slash, o.transform.position, Quaternion.identity);
 
             StopCoroutine("SlowDown");
-            StartCoroutine("SlowDown", new[] {0.4f, 0.2f});
+            StartCoroutine("SlowDown", 0.4f);
+            _rigidbody2D.velocity = _rigidbody2D.velocity + _rigidbody2D.velocity.normalized * .1f;
         }
         else if (o.CompareTag("StoveMouth"))
         {
             UIScript.instance.LifeLoss();
         }
-        else if (o.CompareTag("GameStart"))
-        {
-            StoveScript.instance.GameStart();
-        }
+
+//        else if (o.CompareTag("GameStart"))
+//        {
+//            StoveScript.instance.GameStart();
+//        }
     }
 
     void OnCollisionEnter2D(Collision2D o)
@@ -52,12 +64,14 @@ public class BallScript : MonoBehaviour
                 Instantiate(Slash, o.transform.position, Quaternion.identity);
 
             StopCoroutine("SlowDown");
-            StartCoroutine("SlowDown", new[] {0.2f, 0.4f});
+            StartCoroutine("SlowDown", 0.2f);
+            _rigidbody2D.velocity = _rigidbody2D.velocity + _rigidbody2D.velocity.normalized * .1f;
         }
     }
 
     void LateUpdate()
     {
+        if (!gameStart) return;
         transform.rotation = Quaternion.FromToRotation(Vector3.right, _rigidbody2D.velocity);
 
         // Guide Line
@@ -66,21 +80,37 @@ public class BallScript : MonoBehaviour
         float remainLength = 5;
         Vector2 lineSpeed = _rigidbody2D.velocity;
         Vector2 linePosition = transform.position;
-        RaycastHit2D lineHit = Physics2D.CircleCast(linePosition, BallSize, lineSpeed, remainLength, 1 << 9);
-
-        while (lineHit.collider != null)
+        RaycastHit2D[] lineHits = Physics2D.CircleCastAll(linePosition, BallSize, lineSpeed, remainLength, 1 << 9);
+ 
+        while (lineHits != null && lineHits.Length > 0)
         {
 //            Debug.Log(remainLength);
-            if (remainLength < lineHit.distance) break;
-            remainLength -= lineHit.distance;
-            Vector2 newLinePosition = lineHit.point + lineHit.normal * BallSize;
-            LineRenderer lineRenderer = GuideLines.instance.GetAvailableObject().GetComponent<LineRenderer>();
-            lineRenderer.SetPositions(new[] {(Vector3) linePosition, (Vector3) newLinePosition});
-            lineRenderer.material.mainTextureScale = new Vector2(lineHit.distance * 5.2f, 1);
-            lineRenderer.gameObject.SetActive(true);
-            linePosition = newLinePosition;
-            lineSpeed = Vector2.Reflect(lineSpeed, lineHit.normal);
-            lineHit = Physics2D.CircleCast(linePosition, BallSize, lineSpeed, remainLength, 1 << 9);
+            int count = 0;
+            foreach (var lineHit in lineHits)
+            {
+                if (lineHit.collider.isTrigger) continue;
+                LineRenderer lineRenderer = GuideLines.instance.GetAvailableObject().GetComponent<LineRenderer>();
+                if (remainLength < lineHit.distance)
+                { 
+                    lineRenderer.SetPositions(new[]
+                        {(Vector3) linePosition, (Vector3) (linePosition + lineSpeed.normalized * remainLength)});
+                    lineRenderer.material.mainTextureScale = new Vector2(remainLength * 5.2f, 1);
+                    lineRenderer.gameObject.SetActive(true);
+                    return;
+                }
+                remainLength -= lineHit.distance;
+                Vector2 newLinePosition = lineHit.point + lineHit.normal * BallSize;
+                
+                lineRenderer.SetPositions(new[] {(Vector3) linePosition, (Vector3) newLinePosition});
+                lineRenderer.material.mainTextureScale = new Vector2(lineHit.distance * 5.2f, 1);
+                lineRenderer.gameObject.SetActive(true);
+                linePosition = newLinePosition;
+                lineSpeed = Vector2.Reflect(lineSpeed, lineHit.normal);
+                lineHits = Physics2D.CircleCastAll(linePosition, BallSize, lineSpeed, remainLength, 1 << 9);
+                count = 1;
+                break;
+            }
+            if (count == 0) break;
         }
 
         LineRenderer lineRendererEnd = GuideLines.instance.GetAvailableObject().GetComponent<LineRenderer>();
@@ -90,11 +120,10 @@ public class BallScript : MonoBehaviour
         lineRendererEnd.gameObject.SetActive(true);
     }
 
-
-    IEnumerator SlowDown(float[] scaleAndDuration)
+    IEnumerator SlowDown(float scale)
     {
-        Time.timeScale = scaleAndDuration[0];
-        yield return new WaitForSecondsRealtime(scaleAndDuration[1]);
+        Time.timeScale = scale;
+        yield return new WaitForSeconds(.1f);
         Time.timeScale = 1f;
     }
 
@@ -102,5 +131,11 @@ public class BallScript : MonoBehaviour
     {
         Instantiate(ShockWave, transform.position, transform.rotation).GetComponent<ShockWaveScript>()
             .SetSpeed(2 * _rigidbody2D.velocity);
+    }
+
+    public void SetPassable(bool passable)
+    {
+        if (passable) _spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+        else _spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 }

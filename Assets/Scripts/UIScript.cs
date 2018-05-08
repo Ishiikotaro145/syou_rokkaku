@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class UIScript : MonoBehaviour
 {
@@ -14,6 +12,7 @@ public class UIScript : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject clearUI;
     public GameObject player;
+    public GameObject pausePanel;
 
     private GameObject[] heartArray;
     private int score;
@@ -39,6 +38,9 @@ public class UIScript : MonoBehaviour
             hearts.transform.GetChild(0).gameObject, hearts.transform.GetChild(1).gameObject,
             hearts.transform.GetChild(2).gameObject
         };
+        playerInstance = Instantiate(player, new Vector2(0, -2f), Quaternion.FromToRotation(Vector3.right, Vector3.up))
+            .GetComponent<BallScript>();
+//        playerInstance.transform.rotation = Quaternion.FromToRotation(Vector3.right, Vector3.up);
 //        chargeBarImage = chargeBar.GetComponent<Image>();
     }
 
@@ -58,10 +60,14 @@ public class UIScript : MonoBehaviour
         }
         else
         {
-            Destroy(playerInstance);
+            Destroy(playerInstance.gameObject);
+            StageManager.GetInstance.RestorePassableImmediately();
             GuideLines.instance.RemoveAll();
             StoveScript.instance.Reset();
             tapToStart.active = true;
+            playerInstance =
+                Instantiate(player, new Vector2(0, -2f), Quaternion.FromToRotation(Vector3.right, Vector3.up))
+                    .GetComponent<BallScript>();
         }
     }
 
@@ -69,6 +75,7 @@ public class UIScript : MonoBehaviour
     {
         if (gameReset && Input.GetMouseButtonDown(0))
         {
+            if (EventSystem.current.IsPointerOverGameObject()) return;
             gameReset = false;
         }
         else if (!gameStart && !gameOver && !gameReset && Input.GetMouseButtonUp(0))
@@ -81,13 +88,17 @@ public class UIScript : MonoBehaviour
 
         else if (gameStart && !gameReset)
         {
-            if (Input.GetMouseButtonDown(0)) chargeStartTime = Time.time;
+            if (Input.GetMouseButtonDown(0)) chargeStartTime = Time.unscaledTime;
             else if (Input.GetMouseButton(0))
-                chargeBar.transform.localScale = new Vector2(Mathf.Min((Time.time - chargeStartTime) / 2f, 1), 1);
+                chargeBar.transform.localScale = new Vector2(Mathf.Min((Time.unscaledTime - chargeStartTime) / 3f, 1), 1);
             else if (Input.GetMouseButtonUp(0))
             {
                 chargeBar.transform.localScale = new Vector2(0, 1);
-                if (Time.time - chargeStartTime > 2) playerInstance.CreateShokeWave();
+                if (Time.unscaledTime - chargeStartTime > 3)
+                {
+                    StageManager.GetInstance.TriggerEnemyPassable();
+                    playerInstance.SetPassable(true);
+                }
             }
         }
     }
@@ -109,6 +120,7 @@ public class UIScript : MonoBehaviour
 //    }
     private IEnumerator NextScene()
     {
+        Time.timeScale = 1;
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("StageSelect");
     }
@@ -118,6 +130,34 @@ public class UIScript : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         StageManager.GetInstance.GameStart();
 //        yield return new WaitForSeconds(.5f);
-        playerInstance = Instantiate(player, new Vector2(0, -5f), Quaternion.identity).GetComponent<BallScript>();
+//        playerInstance = Instantiate(player, new Vector2(0, -2f), Quaternion.identity).GetComponent<BallScript>();
+        playerInstance.GameStart();
+        StoveScript.instance.GameStart();
+    }
+
+    public void Pause(bool isPause)
+    {
+        if (isPause)
+        {
+            Time.timeScale = 0;
+            pausePanel.SetActive(true);
+        }
+        else
+        {
+            pausePanel.SetActive(false);
+            Time.timeScale = 1;
+        }
+    }
+
+    public void Restart()
+    { 
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Main");
+    }
+
+    public void GoToMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("StageSelect");
     }
 }

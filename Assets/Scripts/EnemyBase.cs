@@ -4,12 +4,15 @@ public class EnemyBase : MonoBehaviour
 {
     //エネミーのパラメータ
     public int hp; //敵のHP
+
 //    public bool isRefrect; //反射するか
     public int exp;
     int enemyID;
     private int currentHP;
     private Transform hpBar;
     private bool startFinish;
+    private bool isPassable;
+    private CircleCollider2D _collider2D;
 
 
     //演出周りで必要な変数
@@ -20,11 +23,17 @@ public class EnemyBase : MonoBehaviour
     float addScale = 3.0f;
     float alpha = 1.0f;
 
+    void Awake()
+    {
+        _collider2D = GetComponent<CircleCollider2D>();
+        isPassable = _collider2D.isTrigger;
+    }
+    
     // Use this for initialization
     void Start()
     {
         isSpawnAnime = true;
-
+         
         //マネージャーにスポーンしたことを伝える
         EnemyManager.GetInstance.TellSpawn();
         currentHP = hp;
@@ -34,7 +43,6 @@ public class EnemyBase : MonoBehaviour
             transform.GetChild(0).gameObject.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(false);
         }
- 
     }
 
     // Update is called once per frame
@@ -48,12 +56,12 @@ public class EnemyBase : MonoBehaviour
     protected void SpawnAnime()
     {
         if (isSpawnAnime == false) return;
-
-        //
-        addScale *= 0.8f;
-        transform.localScale = new Vector3(1.5f + addScale, 1.5f + addScale, 1.5f);
-
-        if (addScale > 0.05f) return;
+//
+//        //
+//        addScale *= 0.8f;
+//        transform.localScale = new Vector3(1.5f + addScale, 1.5f + addScale, 1.5f);
+//
+//        if (addScale > 0.05f) return;
         isSpawnAnime = false;
         startFinish = true;
     }
@@ -63,11 +71,11 @@ public class EnemyBase : MonoBehaviour
     {
         if (isDeadAnime == false) return;
 
-        addScale *= 0.9f;
-        transform.localScale = new Vector3(addScale, addScale, 1.0f);
-        //死亡アニメが終わったらデリートする
-
-        if (addScale > 0.05f) return;
+//        addScale *= 0.9f;
+//        transform.localScale = new Vector3(addScale, addScale, 1.0f);
+//        //死亡アニメが終わったらデリートする
+//
+//        if (addScale > 0.05f) return;
 
         isDeadAnime = false;
 //        gameObject.active = false;
@@ -93,5 +101,12 @@ public class EnemyBase : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void TriggerPassableWhenNecessary()
+    {
+        if (isPassable) return;
+        Debug.Log("Triggered "+name);
+        _collider2D.isTrigger = !_collider2D.isTrigger;
     }
 }
