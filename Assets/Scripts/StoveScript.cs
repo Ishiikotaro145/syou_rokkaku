@@ -63,7 +63,7 @@ public class StoveScript : MonoBehaviour
         if (currentSpeed < LeastSpeedToBreak || currentHP <= 0) return false;
         currentHP--;
         HPBarImage.fillAmount = (float) currentHP / (HpPerWall * (totalWallCnt - 1));
-        if (currentHP < (currentWallCnt - 1) * HpPerWall)
+        if (currentHP < (currentWallCnt - 2) * HpPerWall)
         {
             currentWallCnt--;
             return true;
