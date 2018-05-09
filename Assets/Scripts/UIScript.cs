@@ -66,7 +66,7 @@ public class UIScript : MonoBehaviour
             StoveScript.instance.Reset();
             tapToStart.active = true;
             playerInstance =
-                Instantiate(player, new Vector2(0, -2f), Quaternion.FromToRotation(Vector3.right, Vector3.up))
+                Instantiate(player, new Vector2(0, -1.8f), Quaternion.FromToRotation(Vector3.right, Vector3.up))
                     .GetComponent<BallScript>();
         }
     }

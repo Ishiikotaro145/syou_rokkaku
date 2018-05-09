@@ -25,7 +25,7 @@ public class BallScript : MonoBehaviour
 
     public void GameStart()
     {
-        _rigidbody2D.velocity = Vector2.up * 4;
+        _rigidbody2D.velocity = Vector2.up * 2;
         gameStart = true;
     }
 
@@ -67,6 +67,11 @@ public class BallScript : MonoBehaviour
             StartCoroutine("SlowDown", 0.2f);
             _rigidbody2D.velocity = _rigidbody2D.velocity + _rigidbody2D.velocity.normalized * .1f;
         }
+        else if (o.collider.CompareTag("Stove"))
+        {
+            if (StoveScript.instance.HitStoveWall(_rigidbody2D.velocity.magnitude))
+                o.gameObject.SetActive(false);
+        }
     }
 
     void LateUpdate()
@@ -77,11 +82,11 @@ public class BallScript : MonoBehaviour
         // Guide Line
 
         GuideLines.instance.RemoveAll();
-        float remainLength = 5;
+        float remainLength = 2;
         Vector2 lineSpeed = _rigidbody2D.velocity;
         Vector2 linePosition = transform.position;
         RaycastHit2D[] lineHits = Physics2D.CircleCastAll(linePosition, BallSize, lineSpeed, remainLength, 1 << 9);
- 
+
         while (lineHits != null && lineHits.Length > 0)
         {
 //            Debug.Log(remainLength);
@@ -91,16 +96,17 @@ public class BallScript : MonoBehaviour
                 if (lineHit.collider.isTrigger) continue;
                 LineRenderer lineRenderer = GuideLines.instance.GetAvailableObject().GetComponent<LineRenderer>();
                 if (remainLength < lineHit.distance)
-                { 
+                {
                     lineRenderer.SetPositions(new[]
                         {(Vector3) linePosition, (Vector3) (linePosition + lineSpeed.normalized * remainLength)});
                     lineRenderer.material.mainTextureScale = new Vector2(remainLength * 5.2f, 1);
                     lineRenderer.gameObject.SetActive(true);
                     return;
                 }
+
                 remainLength -= lineHit.distance;
                 Vector2 newLinePosition = lineHit.point + lineHit.normal * BallSize;
-                
+
                 lineRenderer.SetPositions(new[] {(Vector3) linePosition, (Vector3) newLinePosition});
                 lineRenderer.material.mainTextureScale = new Vector2(lineHit.distance * 5.2f, 1);
                 lineRenderer.gameObject.SetActive(true);
@@ -110,6 +116,7 @@ public class BallScript : MonoBehaviour
                 count = 1;
                 break;
             }
+
             if (count == 0) break;
         }
 
