@@ -52,10 +52,9 @@ public class BlowEnemy : EnemyBase
             _rigidbody2D.isKinematic = false;
             _rigidbody2D.velocity = -2 * speed;
             gameObject.layer = 11;
-            isDead = true;
-        }
-
-        return false;
+            isDead = true; 
+        } 
+        return true;
     }
 
     void Update()
