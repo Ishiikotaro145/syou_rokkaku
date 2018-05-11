@@ -52,8 +52,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4082001808203662}
   - component: {fileID: 212951567655417178}
-  - component: {fileID: 114558874236899592}
   - component: {fileID: 58804844056646864}
+  - component: {fileID: 114017775777766392}
   m_Layer: 9
   m_Name: Enemy2
   m_TagString: Enemy
@@ -117,7 +117,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.175
---- !u!114 &114558874236899592
+--- !u!114 &114017775777766392
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -125,11 +125,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1684465421305012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 4
-  isRefrect: 1
   exp: 5
 --- !u!212 &212079815803539814
 SpriteRenderer:
@@ -144,7 +143,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -189,7 +187,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -234,7 +231,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

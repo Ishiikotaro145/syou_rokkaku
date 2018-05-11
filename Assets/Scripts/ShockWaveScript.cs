@@ -30,7 +30,7 @@ public class ShockWaveScript : MonoBehaviour
         if (o.CompareTag("Enemy"))
         {
             EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
-            enemyBase.HitByPlayer();
+            enemyBase.HitByPlayer(_rigidbody2D.velocity);
         }
     }
 
@@ -39,7 +39,7 @@ public class ShockWaveScript : MonoBehaviour
         if (o.collider.CompareTag("Enemy"))
         {
             EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
-            enemyBase.HitByPlayer();
+            enemyBase.HitByPlayer(_rigidbody2D.velocity);
         }
     }
 //    IEnumerator Damage()

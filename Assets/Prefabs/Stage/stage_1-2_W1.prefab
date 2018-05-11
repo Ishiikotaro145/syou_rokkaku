@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4490641716612458}
   - component: {fileID: 212655327752836056}
-  - component: {fileID: 114678276540877366}
   - component: {fileID: 58434053655899786}
+  - component: {fileID: 114154978714592692}
   m_Layer: 0
   m_Name: Enemy (2)
   m_TagString: Enemy
@@ -117,8 +117,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4830456880261082}
   - component: {fileID: 212972739262906446}
-  - component: {fileID: 114906678101635078}
   - component: {fileID: 58531762116805814}
+  - component: {fileID: 114968136034817564}
   m_Layer: 9
   m_Name: Enemy2 (6)
   m_TagString: Enemy
@@ -199,8 +199,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4707541677533324}
   - component: {fileID: 212757439137574978}
-  - component: {fileID: 114943732702061110}
   - component: {fileID: 58970588768875986}
+  - component: {fileID: 114726461750175620}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -249,8 +249,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4346332445648126}
   - component: {fileID: 212858304430314986}
-  - component: {fileID: 114433970322919720}
   - component: {fileID: 58158650246340382}
+  - component: {fileID: 114286900650450494}
   m_Layer: 0
   m_Name: Enemy (6)
   m_TagString: Enemy
@@ -267,8 +267,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4669674359831448}
   - component: {fileID: 212879270934912830}
-  - component: {fileID: 114623842234548446}
   - component: {fileID: 58818811163571160}
+  - component: {fileID: 114535465029111164}
   m_Layer: 0
   m_Name: Enemy (9)
   m_TagString: Enemy
@@ -301,8 +301,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4101224500374888}
   - component: {fileID: 212439854735002762}
-  - component: {fileID: 114409099942718286}
   - component: {fileID: 58669238824957860}
+  - component: {fileID: 114926634602635606}
   m_Layer: 0
   m_Name: Enemy (7)
   m_TagString: Enemy
@@ -415,8 +415,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4712885860676880}
   - component: {fileID: 212675081928983704}
-  - component: {fileID: 114332174441593692}
   - component: {fileID: 58458635764788550}
+  - component: {fileID: 114721770916871384}
   m_Layer: 0
   m_Name: Enemy (5)
   m_TagString: Enemy
@@ -433,8 +433,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4746683161014946}
   - component: {fileID: 212287678379347500}
-  - component: {fileID: 114629626858370412}
   - component: {fileID: 58092385808198778}
+  - component: {fileID: 114502482919068744}
   m_Layer: 0
   m_Name: Enemy (4)
   m_TagString: Enemy
@@ -467,8 +467,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4453909667151892}
   - component: {fileID: 212845644160763824}
-  - component: {fileID: 114552029135350642}
   - component: {fileID: 58977038549342252}
+  - component: {fileID: 114126611205073368}
   m_Layer: 0
   m_Name: Enemy (1)
   m_TagString: Enemy
@@ -501,8 +501,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4169722723403594}
   - component: {fileID: 212122091496141286}
-  - component: {fileID: 114847552969120186}
   - component: {fileID: 58468522693234310}
+  - component: {fileID: 114449426209780676}
   m_Layer: 0
   m_Name: Enemy (3)
   m_TagString: Enemy
@@ -567,8 +567,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4684445285206190}
   - component: {fileID: 212228511674978060}
-  - component: {fileID: 114271660788396522}
   - component: {fileID: 58171316574871782}
+  - component: {fileID: 114094289506936788}
   m_Layer: 9
   m_Name: Enemy2 (1)
   m_TagString: Enemy
@@ -585,8 +585,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4695321357838006}
   - component: {fileID: 212989261409104106}
-  - component: {fileID: 114171411515120022}
   - component: {fileID: 58915999040295486}
+  - component: {fileID: 114575472380382104}
   m_Layer: 9
   m_Name: Enemy2 (5)
   m_TagString: Enemy
@@ -667,8 +667,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4498934749824996}
   - component: {fileID: 212250160511911580}
-  - component: {fileID: 114612940458040736}
   - component: {fileID: 58552834497815258}
+  - component: {fileID: 114378013923022572}
   m_Layer: 0
   m_Name: Enemy (8)
   m_TagString: Enemy
@@ -1430,21 +1430,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.13
---- !u!114 &114171411515120022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1909602400662494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 3
-  isRefrect: 1
-  exp: 5
---- !u!114 &114271660788396522
+--- !u!114 &114094289506936788
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1452,55 +1438,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1830453213255514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
-  isRefrect: 1
+  hp: 4
   exp: 5
---- !u!114 &114332174441593692
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1675918955881534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 1
-  isRefrect: 0
-  exp: 1
---- !u!114 &114409099942718286
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1539298423409540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 1
-  isRefrect: 0
-  exp: 1
---- !u!114 &114433970322919720
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1450490806786730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 1
-  isRefrect: 0
-  exp: 1
---- !u!114 &114552029135350642
+--- !u!114 &114126611205073368
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1508,55 +1451,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1773206830350100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
-  isRefrect: 0
   exp: 1
---- !u!114 &114612940458040736
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1988073277058000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 1
-  isRefrect: 0
-  exp: 1
---- !u!114 &114623842234548446
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1473179042062098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 1
-  isRefrect: 0
-  exp: 1
---- !u!114 &114629626858370412
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1693988308364884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 1
-  isRefrect: 0
-  exp: 1
---- !u!114 &114678276540877366
+--- !u!114 &114154978714592692
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1564,13 +1464,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 1032494898378926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
-  isRefrect: 0
   exp: 1
---- !u!114 &114847552969120186
+--- !u!114 &114286900650450494
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1450490806786730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  exp: 1
+--- !u!114 &114378013923022572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988073277058000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  exp: 1
+--- !u!114 &114449426209780676
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1578,27 +1503,64 @@ MonoBehaviour:
   m_GameObject: {fileID: 1781691082516182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
-  isRefrect: 0
   exp: 1
---- !u!114 &114906678101635078
+--- !u!114 &114502482919068744
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1223994901289548}
+  m_GameObject: {fileID: 1693988308364884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
-  isRefrect: 1
+  hp: 1
+  exp: 1
+--- !u!114 &114535465029111164
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1473179042062098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  exp: 1
+--- !u!114 &114575472380382104
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1909602400662494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 4
   exp: 5
---- !u!114 &114943732702061110
+--- !u!114 &114721770916871384
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1675918955881534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  exp: 1
+--- !u!114 &114726461750175620
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1606,12 +1568,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 1411140405682894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2aaa349e27a6498383fab3102087b78, type: 3}
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
-  isRefrect: 0
   exp: 1
+--- !u!114 &114926634602635606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1539298423409540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  exp: 1
+--- !u!114 &114968136034817564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1223994901289548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914b81aef1ec74826abf4132341d3e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 4
+  exp: 5
 --- !u!212 &212043252374076660
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1625,7 +1612,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -1670,7 +1656,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -1715,7 +1700,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -1760,7 +1744,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -1805,7 +1788,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -1850,7 +1832,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -1895,7 +1876,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -1940,7 +1920,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -1985,7 +1964,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2030,7 +2008,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2075,7 +2052,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2120,7 +2096,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2165,7 +2140,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2210,7 +2184,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2255,7 +2228,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2300,7 +2272,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2345,7 +2316,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2390,7 +2360,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2435,7 +2404,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2480,7 +2448,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2525,7 +2492,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2570,7 +2536,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2615,7 +2580,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2660,7 +2624,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2705,7 +2668,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2750,7 +2712,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2795,7 +2756,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2840,7 +2800,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2885,7 +2844,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2930,7 +2888,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -2975,7 +2932,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -3020,7 +2976,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -3065,7 +3020,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -3110,7 +3064,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -3155,7 +3108,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -3200,7 +3152,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -3245,7 +3196,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -3290,7 +3240,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -3335,7 +3284,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

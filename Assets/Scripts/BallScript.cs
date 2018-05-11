@@ -7,6 +7,7 @@ public class BallScript : MonoBehaviour
     public static BallScript instance;
     public GameObject Slash;
     public GameObject ShockWave;
+    public GameObject LaserPrefab;
     private const float BallSize = .28f;
     private Rigidbody2D _rigidbody2D;
 
@@ -36,7 +37,8 @@ public class BallScript : MonoBehaviour
             EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
             _animator.SetTrigger("Attack");
 
-            if (enemyBase.HitByPlayer()) Instantiate(Slash, o.transform.position, Quaternion.identity);
+            if (enemyBase.HitByPlayer(_rigidbody2D.velocity))
+                Instantiate(Slash, o.transform.position, Quaternion.identity);
 
             StopCoroutine("SlowDown");
             StartCoroutine("SlowDown", 0.4f);
@@ -44,7 +46,9 @@ public class BallScript : MonoBehaviour
         }
         else if (o.CompareTag("StoveMouth"))
         {
+            Instantiate(LaserPrefab, transform.position, Quaternion.identity);
             UIScript.instance.LifeLoss();
+            Destroy(gameObject);
         }
 
 //        else if (o.CompareTag("GameStart"))
@@ -60,7 +64,7 @@ public class BallScript : MonoBehaviour
             EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
             _animator.SetTrigger("Attack");
 
-            if (enemyBase.HitByPlayer())
+            if (enemyBase.HitByPlayer(_rigidbody2D.velocity))
                 Instantiate(Slash, o.transform.position, Quaternion.identity);
 
             StopCoroutine("SlowDown");
@@ -73,7 +77,7 @@ public class BallScript : MonoBehaviour
                 o.gameObject.SetActive(false);
         }
     }
-
+ 
     void LateUpdate()
     {
         if (!gameStart) return;
