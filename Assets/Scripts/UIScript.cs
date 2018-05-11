@@ -13,6 +13,7 @@ public class UIScript : MonoBehaviour
     public GameObject clearUI;
     public GameObject player;
     public GameObject pausePanel;
+    public float startYusyaPositionY;
 
     private GameObject[] heartArray;
     private int score;
@@ -38,7 +39,7 @@ public class UIScript : MonoBehaviour
             hearts.transform.GetChild(0).gameObject, hearts.transform.GetChild(1).gameObject,
             hearts.transform.GetChild(2).gameObject
         };
-        playerInstance = Instantiate(player, new Vector2(0, -2f), Quaternion.FromToRotation(Vector3.right, Vector3.up))
+        playerInstance = Instantiate(player, new Vector2(0, startYusyaPositionY), Quaternion.FromToRotation(Vector3.right, Vector3.up))
             .GetComponent<BallScript>();
 //        playerInstance.transform.rotation = Quaternion.FromToRotation(Vector3.right, Vector3.up);
 //        chargeBarImage = chargeBar.GetComponent<Image>();
@@ -56,27 +57,19 @@ public class UIScript : MonoBehaviour
         {
             gameOverUI.active = true;
             gameOver = true;
-            if (playerInstance.gameObject != null) Destroy(playerInstance.gameObject);
-            GuideLines.instance.RemoveAll();
             StartCoroutine("NextScene");
         }
         else
         {
-            if (playerInstance.gameObject != null) Destroy(playerInstance.gameObject);
+            Destroy(playerInstance.gameObject);
+            StageManager.GetInstance.RestorePassableImmediately();
             GuideLines.instance.RemoveAll();
-            StartCoroutine("GameReset");
+            StoveScript.instance.Reset();
+            tapToStart.active = true;
+            playerInstance =
+                Instantiate(player, new Vector2(0, startYusyaPositionY), Quaternion.FromToRotation(Vector3.right, Vector3.up))
+                    .GetComponent<BallScript>();
         }
-    }
-
-    IEnumerator GameReset()
-    {
-        yield return new WaitForSeconds(1);
-        StageManager.GetInstance.RestorePassableImmediately();
-        StoveScript.instance.Reset();
-        tapToStart.active = true;
-        playerInstance =
-            Instantiate(player, new Vector2(0, -1.8f), Quaternion.FromToRotation(Vector3.right, Vector3.up))
-                .GetComponent<BallScript>();
     }
 
     private void Update()
@@ -98,8 +91,7 @@ public class UIScript : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0)) chargeStartTime = Time.unscaledTime;
             else if (Input.GetMouseButton(0))
-                chargeBar.transform.localScale =
-                    new Vector2(Mathf.Min((Time.unscaledTime - chargeStartTime) / 3f, 1), 1);
+                chargeBar.transform.localScale = new Vector2(Mathf.Min((Time.unscaledTime - chargeStartTime) / 3f, 1), 1);
             else if (Input.GetMouseButtonUp(0))
             {
                 chargeBar.transform.localScale = new Vector2(0, 1);
@@ -159,7 +151,7 @@ public class UIScript : MonoBehaviour
     }
 
     public void Restart()
-    {
+    { 
         Time.timeScale = 1;
         SceneManager.LoadScene("Main");
     }
