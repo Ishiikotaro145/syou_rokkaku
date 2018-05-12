@@ -52,8 +52,16 @@ public class BlowEnemy : EnemyBase
             _rigidbody2D.isKinematic = false;
             _rigidbody2D.velocity = -2 * speed;
             gameObject.layer = 11;
-            isDead = true; 
+            isDead = true;
+
+            //EnemyManager.GetInstance.TellDead();
         } 
+        isDamage = true;
+        damageTime = 0;
+
+
+
+
         return true;
     }
 
@@ -65,5 +73,6 @@ public class BlowEnemy : EnemyBase
             Instantiate(ParticlePrefab, transform.position, Quaternion.identity);
             Destroy(gameObject); 
         }
+        Damage();
     }
 }

@@ -26,7 +26,7 @@ public class BallScript : MonoBehaviour
 
     public void GameStart()
     {
-        _rigidbody2D.velocity = Vector2.up * 2;
+        _rigidbody2D.velocity = Vector2.up * 4;
         gameStart = true;
     }
 
@@ -40,9 +40,9 @@ public class BallScript : MonoBehaviour
             if (enemyBase.HitByPlayer(_rigidbody2D.velocity))
                 Instantiate(Slash, o.transform.position, Quaternion.identity);
 
-            StopCoroutine("SlowDown");
-            StartCoroutine("SlowDown", 0.4f);
-            _rigidbody2D.velocity = _rigidbody2D.velocity + _rigidbody2D.velocity.normalized * .1f;
+            //StopCoroutine("SlowDown");
+            //StartCoroutine("SlowDown", 0.4f);
+            _rigidbody2D.velocity = _rigidbody2D.velocity + _rigidbody2D.velocity.normalized * .03f;
         }
         else if (o.CompareTag("StoveMouth"))
         {
@@ -67,9 +67,9 @@ public class BallScript : MonoBehaviour
             if (enemyBase.HitByPlayer(_rigidbody2D.velocity))
                 Instantiate(Slash, o.transform.position, Quaternion.identity);
 
-            StopCoroutine("SlowDown");
-            StartCoroutine("SlowDown", 0.2f);
-            _rigidbody2D.velocity = _rigidbody2D.velocity + _rigidbody2D.velocity.normalized * .1f;
+            //StopCoroutine("SlowDown");
+            //StartCoroutine("SlowDown", 0.2f);
+            _rigidbody2D.velocity = _rigidbody2D.velocity + _rigidbody2D.velocity.normalized * .06f;
         }
         else if (o.collider.CompareTag("Stove"))
         {
@@ -86,7 +86,7 @@ public class BallScript : MonoBehaviour
         // Guide Line
 
         GuideLines.instance.RemoveAll();
-        float remainLength = 2;
+        float remainLength = 4;
         Vector2 lineSpeed = _rigidbody2D.velocity;
         Vector2 linePosition = transform.position;
         RaycastHit2D[] lineHits = Physics2D.CircleCastAll(linePosition, BallSize, lineSpeed, remainLength, 1 << 9);
