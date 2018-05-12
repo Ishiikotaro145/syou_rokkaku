@@ -8,7 +8,7 @@ public class BallScript : MonoBehaviour
     public GameObject Slash;
     // public GameObject ShockWave;
     public GameObject LaserPrefab;
-    private const float BallSize = .28f;
+    private const float BallSize = .35f;
     private Rigidbody2D _rigidbody2D;
 
     private Animator _animator;
@@ -26,7 +26,7 @@ public class BallScript : MonoBehaviour
 
     public void GameStart()
     {
-        _rigidbody2D.velocity = Vector2.up * 4;
+        _rigidbody2D.velocity = Vector2.up * 3;
         gameStart = true;
     }
 
