@@ -20,6 +20,17 @@ public class NormalEnemy : EnemyBase
             Destroy(gameObject);
         }
 
+        isDamage = true;
+        damageTime = 0;
+
+
         return true;
+    }
+
+
+    void Update()
+    {
+        //Debug.Log("NormalEnemyUpdate");
+        Damage();
     }
 }

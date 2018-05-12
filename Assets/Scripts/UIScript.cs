@@ -13,6 +13,9 @@ public class UIScript : MonoBehaviour
     public GameObject clearUI;
     public GameObject player;
     public GameObject pausePanel;
+    public float startYusyaPositionY;
+    public float startYusyaSpeed;
+    private float speed;
 
     private GameObject[] heartArray;
     private int score;
@@ -33,12 +36,13 @@ public class UIScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        speed = startYusyaSpeed;
         heartArray = new[]
         {
             hearts.transform.GetChild(0).gameObject, hearts.transform.GetChild(1).gameObject,
             hearts.transform.GetChild(2).gameObject
         };
-        playerInstance = Instantiate(player, new Vector2(0, -2f), Quaternion.FromToRotation(Vector3.right, Vector3.up))
+        playerInstance = Instantiate(player, new Vector2(0, startYusyaPositionY), Quaternion.FromToRotation(Vector3.right, Vector3.up))
             .GetComponent<BallScript>();
 //        playerInstance.transform.rotation = Quaternion.FromToRotation(Vector3.right, Vector3.up);
 //        chargeBarImage = chargeBar.GetComponent<Image>();
@@ -56,29 +60,38 @@ public class UIScript : MonoBehaviour
         {
             gameOverUI.active = true;
             gameOver = true;
-            if (playerInstance.gameObject != null) Destroy(playerInstance.gameObject);
-            GuideLines.instance.RemoveAll();
             StartCoroutine("NextScene");
         }
         else
         {
-            if (playerInstance.gameObject != null) Destroy(playerInstance.gameObject);
+            Destroy(playerInstance.gameObject);
+            speed = startYusyaSpeed;
+            StageManager.GetInstance.RestorePassableImmediately();
             GuideLines.instance.RemoveAll();
-            StartCoroutine("GameReset");
+            StoveScript.instance.Reset();
+            tapToStart.active = true;
+            playerInstance =
+                Instantiate(player, new Vector2(0, startYusyaPositionY), Quaternion.FromToRotation(Vector3.right, Vector3.up))
+                    .GetComponent<BallScript>();
         }
     }
 
-    IEnumerator GameReset()
+    public void WaveClear()
     {
-        yield return new WaitForSeconds(1);
-        StageManager.GetInstance.RestorePassableImmediately();
-        StoveScript.instance.Reset();
+        gameStart = false;
+        gameReset = true;
+        speed = playerInstance.GetCurrentSpeed();
+        Destroy(playerInstance.gameObject);
+        
+//        StageManager.GetInstance.RestorePassableImmediately();
+        GuideLines.instance.RemoveAll();
+//        StoveScript.instance.Reset();
         tapToStart.active = true;
         playerInstance =
-            Instantiate(player, new Vector2(0, -1.8f), Quaternion.FromToRotation(Vector3.right, Vector3.up))
+            Instantiate(player, new Vector2(0, startYusyaPositionY), Quaternion.FromToRotation(Vector3.right, Vector3.up))
                 .GetComponent<BallScript>();
     }
-
+    
     private void Update()
     {
         if (gameReset && Input.GetMouseButtonDown(0))
@@ -94,22 +107,21 @@ public class UIScript : MonoBehaviour
             gameStart = true;
         }
 
-        else if (gameStart && !gameReset)
-        {
-            if (Input.GetMouseButtonDown(0)) chargeStartTime = Time.unscaledTime;
-            else if (Input.GetMouseButton(0))
-                chargeBar.transform.localScale =
-                    new Vector2(Mathf.Min((Time.unscaledTime - chargeStartTime) / 3f, 1), 1);
-            else if (Input.GetMouseButtonUp(0))
-            {
-                chargeBar.transform.localScale = new Vector2(0, 1);
-                if (Time.unscaledTime - chargeStartTime > 3)
-                {
-                    StageManager.GetInstance.TriggerEnemyPassable();
-                    playerInstance.SetPassable(true);
-                }
-            }
-        }
+//        else if (gameStart && !gameReset)
+//        {
+//            if (Input.GetMouseButtonDown(0)) chargeStartTime = Time.unscaledTime;
+//            else if (Input.GetMouseButton(0))
+//                chargeBar.transform.localScale = new Vector2(Mathf.Min((Time.unscaledTime - chargeStartTime) / 3f, 1), 1);
+//            else if (Input.GetMouseButtonUp(0))
+//            {
+//                chargeBar.transform.localScale = new Vector2(0, 1);
+//                if (Time.unscaledTime - chargeStartTime > 3)
+//                {
+//                    StageManager.GetInstance.TriggerEnemyPassable();
+//                    playerInstance.SetPassable(true);
+//                }
+//            }
+//        }
     }
 
     public void GameClear()
@@ -140,7 +152,7 @@ public class UIScript : MonoBehaviour
         StageManager.GetInstance.GameStart();
 //        yield return new WaitForSeconds(.5f);
 //        playerInstance = Instantiate(player, new Vector2(0, -2f), Quaternion.identity).GetComponent<BallScript>();
-        playerInstance.GameStart();
+        playerInstance.GameStart(speed);
         StoveScript.instance.GameStart();
     }
 
@@ -159,7 +171,7 @@ public class UIScript : MonoBehaviour
     }
 
     public void Restart()
-    {
+    { 
         Time.timeScale = 1;
         SceneManager.LoadScene("Main");
     }

@@ -8,6 +8,8 @@ public class BlowEnemy : EnemyBase
     public GameObject ParticlePrefab;
     public GameObject LaserPrefab;
 
+    public int hitWallTimes = 1;
+
     private bool isDead;
 
     new void Start()
@@ -25,7 +27,8 @@ public class BlowEnemy : EnemyBase
         else if (o.CompareTag("StoveMouth"))
         {
             Instantiate(LaserPrefab, transform.position, Quaternion.identity);
-            Destroy(gameObject); 
+            EnemyManager.GetInstance.TellDead(); 
+            Destroy(gameObject);
         }
     }
 
@@ -34,6 +37,16 @@ public class BlowEnemy : EnemyBase
         if (o.collider.CompareTag("Enemy"))
         {
             o.gameObject.GetComponent<EnemyBase>().HitByPlayer(_rigidbody2D.velocity);
+        }
+        else if (o.collider.CompareTag("Stove"))
+        {
+            hitWallTimes--;
+            if (hitWallTimes == 0)
+            {
+                Instantiate(ParticlePrefab, transform.position, Quaternion.identity);
+                EnemyManager.GetInstance.TellDead(); 
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -52,18 +65,23 @@ public class BlowEnemy : EnemyBase
             _rigidbody2D.isKinematic = false;
             _rigidbody2D.velocity = -2 * speed;
             gameObject.layer = 11;
-            isDead = true; 
-        } 
+            isDead = true;
+
+            //EnemyManager.GetInstance.TellDead();
+        }
+
+        isDamage = true;
+        damageTime = 0;
+
+
         return true;
     }
 
     void Update()
     {
         if (!isDead) return;
-        if (_rigidbody2D.velocity.magnitude < 0.3)
-        {
-            Instantiate(ParticlePrefab, transform.position, Quaternion.identity);
-            Destroy(gameObject); 
-        }
+        transform.Rotate(0, 0, 720 * Time.deltaTime);
+
+        Damage();
     }
 }

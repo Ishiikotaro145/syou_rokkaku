@@ -24,6 +24,12 @@ public class EnemyManager : SingletonBase<EnemyManager>
     }
 
 
+    void Update()
+    {
+        Debug.Log(nowEnemyCnt);
+    }
+
+
     public void TellSpawn()
     {
         nowEnemyCnt++;
@@ -33,6 +39,10 @@ public class EnemyManager : SingletonBase<EnemyManager>
     public void TellDead()
     {
         nowEnemyCnt--;
-        if (nowEnemyCnt == 0) StageManager.GetInstance.NextWave();
+        if (nowEnemyCnt == 0)
+        {
+            UIScript.instance.WaveClear();
+            StageManager.GetInstance.SetWaveClear();
+        }
     }
 }

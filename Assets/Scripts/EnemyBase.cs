@@ -18,6 +18,11 @@ public abstract class EnemyBase : MonoBehaviour
     float addScale = 3.0f;
     float alpha = 1.0f;
 
+    //ダメージ受けた時に点滅させるのに必要な変数
+    protected bool isDamage = false;
+    protected int damageTime = 0; //ダメージ食らってる時間
+
+
     void Awake()
     {
         _collider2D = GetComponent<CircleCollider2D>();
@@ -38,6 +43,33 @@ public abstract class EnemyBase : MonoBehaviour
         }
 
         startFinish = true;
+    }
+
+
+    protected void Damage()
+    {
+        if (isDamage == false)return;
+
+        if (damageTime % 2 == 0) 
+        {
+            alpha = 1.0f;
+        }
+        else
+        {
+            alpha = 0.0f;
+        }
+        damageTime++;
+        if (damageTime >= 30) 
+        {
+            alpha = 1.0f;
+            isDamage = false;
+        }
+
+
+        SpriteRenderer sprite = transform.GetComponent<SpriteRenderer> ();
+        var color = sprite.color;
+        color.a = alpha;
+        sprite.color = color;
     }
 
 
