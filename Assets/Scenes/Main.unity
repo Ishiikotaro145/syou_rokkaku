@@ -3237,15 +3237,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pStage1_1:
-  - {fileID: 1076179061099078, guid: cd166c5b19474435f975b698b53d7dd4, type: 2}
-  - {fileID: 1076179061099078, guid: cd166c5b19474435f975b698b53d7dd4, type: 2}
-  - {fileID: 1536270927362950, guid: ecc36f86512b8403586741281438e5cc, type: 2}
+  - {fileID: 1946466303731774, guid: 87c13e3aaefc64796a68b1d72f8a2ae1, type: 2}
+  - {fileID: 1791748419683042, guid: 7deb9a03725484a02ab304f1e0387c78, type: 2}
+  - {fileID: 1557740413815400, guid: d3632ed91e8b347498fe4ceb104951f5, type: 2}
   pStage1_2:
-  - {fileID: 1115503698835430, guid: bb4fe42a869f94c5ab429ac1266fef03, type: 2}
-  - {fileID: 1102108325768000, guid: 1499775b326884bce8340d096e255bc1, type: 2}
+  - {fileID: 1754187597916464, guid: e54620e4dd84047c38688d61322ae99a, type: 2}
+  - {fileID: 1536270927362950, guid: ecc36f86512b8403586741281438e5cc, type: 2}
   - {fileID: 1955919082198954, guid: b962606594a9749cc96e7d3dd065f4b7, type: 2}
   pStage1_3:
-  - {fileID: 1125103014824662, guid: dfd5ea4ee2f2d49099f6357feda73487, type: 2}
+  - {fileID: 0}
   - {fileID: 1158068910674362, guid: c7f2331185cec46aaa3770ad035dc315, type: 2}
   - {fileID: 1431671786491428, guid: 3866a601ee88046299c97ecbb3dd6565, type: 2}
   pStage2_1: []
@@ -3875,6 +3875,7 @@ MonoBehaviour:
   clearUI: {fileID: 171174628}
   player: {fileID: 1812884544042476, guid: 7a2e504d8f26a45a69038b0af99c5c6e, type: 2}
   pausePanel: {fileID: 1644821583}
+  startYusyaPositionY: 0
 --- !u!114 &1956840909
 MonoBehaviour:
   m_ObjectHideFlags: 0
