@@ -3875,7 +3875,7 @@ MonoBehaviour:
   clearUI: {fileID: 171174628}
   player: {fileID: 1812884544042476, guid: 7a2e504d8f26a45a69038b0af99c5c6e, type: 2}
   pausePanel: {fileID: 1644821583}
-  startYusyaPositionY: 0
+  startYusyaPositionY: -1.8
 --- !u!114 &1956840909
 MonoBehaviour:
   m_ObjectHideFlags: 0

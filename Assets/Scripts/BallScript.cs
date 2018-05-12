@@ -6,7 +6,7 @@ public class BallScript : MonoBehaviour
 {
     public static BallScript instance;
     public GameObject Slash;
-    public GameObject ShockWave;
+    // public GameObject ShockWave;
     public GameObject LaserPrefab;
     private const float BallSize = .28f;
     private Rigidbody2D _rigidbody2D;
@@ -138,11 +138,11 @@ public class BallScript : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void CreateShokeWave()
-    {
-        Instantiate(ShockWave, transform.position, transform.rotation).GetComponent<ShockWaveScript>()
-            .SetSpeed(2 * _rigidbody2D.velocity);
-    }
+    // public void CreateShokeWave()
+    // {
+    //     Instantiate(ShockWave, transform.position, transform.rotation).GetComponent<ShockWaveScript>()
+    //         .SetSpeed(2 * _rigidbody2D.velocity);
+    // }
 
     public void SetPassable(bool passable)
     {
