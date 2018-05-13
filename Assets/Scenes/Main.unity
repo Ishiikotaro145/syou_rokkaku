@@ -1735,6 +1735,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114202448243022270, guid: 1ae98ac365945416dad27a5a3286ed60,
+        type: 2}
+      propertyPath: bgm.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4564639668752892, guid: 1ae98ac365945416dad27a5a3286ed60, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1766,6 +1771,26 @@ Prefab:
     - target: {fileID: 4564639668752892, guid: 1ae98ac365945416dad27a5a3286ed60, type: 2}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114202448243022270, guid: 1ae98ac365945416dad27a5a3286ed60,
+        type: 2}
+      propertyPath: bgm.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9f0c131beb13d46c19f8350faf235d59, type: 3}
+    - target: {fileID: 114202448243022270, guid: 1ae98ac365945416dad27a5a3286ed60,
+        type: 2}
+      propertyPath: bgm.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4c2c3dcb901394fa68f6a749fa6a95e3, type: 3}
+    - target: {fileID: 114202448243022270, guid: 1ae98ac365945416dad27a5a3286ed60,
+        type: 2}
+      propertyPath: bgm.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 82b64c62cf11e4c7a8d3db53afcd0238, type: 3}
+    - target: {fileID: 82859054938720088, guid: 1ae98ac365945416dad27a5a3286ed60,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ae98ac365945416dad27a5a3286ed60, type: 2}
@@ -3975,6 +4000,7 @@ GameObject:
   - component: {fileID: 1956840905}
   - component: {fileID: 1956840908}
   - component: {fileID: 1956840909}
+  - component: {fileID: 1956840910}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4061,6 +4087,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hearts: {fileID: 2106155383}
   Tutor: {fileID: 2075154761}
+  LossHeartA: {fileID: 8300000, guid: b968887d223d33841b30669aeaace1cf, type: 3}
+  WaveClearA: {fileID: 8300000, guid: 83dec76ab19ad48cf8339cf48294a2a6, type: 3}
+  GameOverA: {fileID: 8300000, guid: fcbe7be9d57f1403bb02bb784fe97da3, type: 3}
+  StageClearA: {fileID: 8300000, guid: b51170f8440a5466e9920e37f785254c, type: 3}
   tapToStart: {fileID: 653465528}
   gameOverUI: {fileID: 642747934}
   clearUI: {fileID: 209087302}
@@ -4084,6 +4114,86 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!82 &1956840910
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1956840904}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &2010425054
 GameObject:
   m_ObjectHideFlags: 0

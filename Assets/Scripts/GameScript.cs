@@ -9,6 +9,10 @@ public class GameScript : MonoBehaviour
 
     public GameObject hearts;
     public GameObject Tutor;
+    public AudioClip LossHeartA;
+    public AudioClip WaveClearA;
+    public AudioClip GameOverA;
+    public AudioClip StageClearA;
 
 //    public GameObject chargeBar;
     public GameObject tapToStart;
@@ -32,6 +36,8 @@ public class GameScript : MonoBehaviour
     private BallScript playerInstance;
 
     private float chargeStartTime;
+
+    private AudioSource _audioSource;
 //    private Image chargeBarImage;
 
     void Awake()
@@ -42,6 +48,7 @@ public class GameScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         speed = startYusyaSpeed;
         heartArray = new[]
         {
@@ -67,11 +74,13 @@ public class GameScript : MonoBehaviour
     {
         if (life == 0 || gameClear) return;
         life--;
+        _audioSource.PlayOneShot(LossHeartA);
         heartArray[life].SetActive(false);
 //        chargeBar.transform.localScale = new Vector2(0, 1);
         if (life == 0)
         {
             gameOverUI.SetActive(true);
+            _audioSource.PlayOneShot(GameOverA);
             GuideLines.instance.RemoveAll();
             StartCoroutine("NextScene");
         }
@@ -92,6 +101,7 @@ public class GameScript : MonoBehaviour
     public void WaveClear()
     {
 //        StageManager.GetInstance.SetWaveClear(); 
+        _audioSource.PlayOneShot(WaveClearA);
         speed = playerInstance.GetCurrentSpeed();
         Destroy(playerInstance.gameObject);
 
@@ -161,6 +171,7 @@ public class GameScript : MonoBehaviour
 
     public void GameClear()
     {
+        _audioSource.PlayOneShot(StageClearA);
         clearUI.active = true;
         gameClear = true;
 //        StartCoroutine("NextScene");
