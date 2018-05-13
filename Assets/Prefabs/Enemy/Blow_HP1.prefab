@@ -153,6 +153,8 @@ MonoBehaviour:
   exp: 5
   ParticlePrefab: {fileID: 1446476875114508, guid: c08f173f7e0cb4f78b544e56d39e0b95,
     type: 2}
+  HitOthersPrefab: {fileID: 1760992571876156, guid: bfbb1577c0cf6194893d32135866cd83,
+    type: 2}
   LaserPrefab: {fileID: 1812881953744270, guid: ed0c022a338d3384d9ee622d354a94e2,
     type: 2}
   hitWallTimes: 1

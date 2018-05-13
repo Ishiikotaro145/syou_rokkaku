@@ -21,14 +21,7 @@ public class EnemyManager : SingletonBase<EnemyManager>
         }
 
 //		DontDestroyOnLoad (this.gameObject);
-    }
-
-
-    void Update()
-    {
-        Debug.Log(nowEnemyCnt);
-    }
-
+    } 
 
     public void TellSpawn()
     {
@@ -41,7 +34,7 @@ public class EnemyManager : SingletonBase<EnemyManager>
         nowEnemyCnt--;
         if (nowEnemyCnt == 0)
         {
-            UIScript.instance.WaveClear();
+            GameScript.instance.WaveClear();
             StageManager.GetInstance.SetWaveClear();
         }
     }

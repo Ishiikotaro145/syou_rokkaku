@@ -7,8 +7,10 @@ public class StoveScript : MonoBehaviour
 {
     public static StoveScript instance;
     public GameObject GameStartTrigger;
-    public GameObject HPBar;
-    public int HpPerWall;
+
+    public GameObject[] Walls;
+//    public GameObject HPBar;
+//    public int HpPerWall;
     public float LeastSpeedToBreak;
 
     private Vector2 mousePositionOld;
@@ -17,18 +19,18 @@ public class StoveScript : MonoBehaviour
 
     private bool gameReset = true;
 
-    private int totalWallCnt = 6;
-    private int currentWallCnt = 6;
-    private int currentHP;
-    private Image HPBarImage;
+//    private int totalWallCnt = 6;
+//    private int currentWallCnt = 6;
+//    private int currentHP;
+//    private Image HPBarImage;
 
 
     // Use this for initialization
     void Awake()
     {
         instance = this;
-        currentHP = (totalWallCnt - 1) * HpPerWall;
-        HPBarImage = HPBar.GetComponent<Image>();
+//        currentHP = (totalWallCnt - 1) * HpPerWall;
+//        HPBarImage = HPBar.GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -57,20 +59,20 @@ public class StoveScript : MonoBehaviour
             mousePositionOld = mousePosition;
         }
     }
-
-    public bool HitStoveWall(float currentSpeed)
-    {
-        if (currentSpeed < LeastSpeedToBreak || currentHP <= 0) return false;
-        currentHP--;
-        HPBarImage.fillAmount = (float) currentHP / (HpPerWall * (totalWallCnt - 1));
-        if (currentHP <= (currentWallCnt - 2) * HpPerWall)
-        {
-            currentWallCnt--;
-            return true;
-        }
-
-        return false;
-    }
+//
+//    public bool HitStoveWall(float currentSpeed)
+//    {
+//        if (currentSpeed < LeastSpeedToBreak || currentHP <= 0) return false;
+//        currentHP--;
+//        HPBarImage.fillAmount = (float) currentHP / (HpPerWall * (totalWallCnt - 1));
+//        if (currentHP <= (currentWallCnt - 2) * HpPerWall)
+//        {
+//            currentWallCnt--;
+//            return true;
+//        }
+//
+//        return false;
+//    }
 
     public void Reset()
     {
@@ -78,6 +80,10 @@ public class StoveScript : MonoBehaviour
         gameStart = false;
         gameReset = true;
         GameStartTrigger.SetActive(true);
+        foreach (var wall in Walls)
+        {
+            wall.GetComponent<WallScript>().Recover();
+        }
     }
 
     public void GameStart()
