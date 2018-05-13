@@ -32,7 +32,6 @@ enum WAVECLEAR : int
 }
 
 
-
 public class StageManager : SingletonBase<StageManager>
 {
     public List<GameObject> pStage1_1;
@@ -56,7 +55,6 @@ public class StageManager : SingletonBase<StageManager>
     int maxWaveCnt = 0;
 
 
-
 //    private bool enemyPassable;
 
 
@@ -71,11 +69,23 @@ public class StageManager : SingletonBase<StageManager>
 
 
     //WAVEクリア　フラグを取得
-    public bool GetisWaveClear(){return isWaveClear;}
+    public bool GetisWaveClear()
+    {
+        return isWaveClear;
+    }
 
 
     public void SetWaveClear()
     {
+        if (allEnemyInStage != null) Destroy(allEnemyInStage);
+//        Debug.Log("wave   " + nowWave);
+        if (nowWave >= maxWaveCnt)
+        {
+            GameScript.instance.GameClear();
+            return;
+        }
+
+        GameScript.instance.WaveClear();
         isWaveClear = true;
     }
 
@@ -99,57 +109,59 @@ public class StageManager : SingletonBase<StageManager>
 
     void WaveClear()
     {
-        if (isWaveClear == false)return;
+        if (isWaveClear == false) return;
         waveClearTime++;
         //オーバーレイ　白
-        if (waveClearTime < 50) 
+        if (waveClearTime < 50)
         {
             overAlpha *= 0.95f;
             overScale *= 0.92f;
 
             waveClearPosX *= 0.95f;
         }
-        if (waveClearTime == 80) 
+
+        if (waveClearTime == 80)
         {
             waveClearPosXConst = 10.0f;
             waveClearPosX = waveClearPosXConst;
         }
+
         if (waveClearTime > 80)
         {
             overAlpha += 0.05f;
             waveClearPosX *= 0.95f;
         }
 
-        SpriteRenderer sprite = pWaveClear [(int)WAVECLEAR.BACK_OVERRAY].GetComponent<SpriteRenderer> ();
+        SpriteRenderer sprite = pWaveClear[(int) WAVECLEAR.BACK_OVERRAY].GetComponent<SpriteRenderer>();
         var color = sprite.color;
         color.a = 0.5f - overAlpha;
         sprite.color = color;
-        pWaveClear [(int)WAVECLEAR.BACK_OVERRAY].transform.localScale = new Vector3 (20.0f,2.0f - overScale,1.0f);
+        pWaveClear[(int) WAVECLEAR.BACK_OVERRAY].transform.localScale = new Vector3(20.0f, 2.0f - overScale, 1.0f);
 
         //WAVE CLEAR
-        SpriteRenderer waveSprite = pWaveClear [(int)WAVECLEAR.WAVE].GetComponent<SpriteRenderer> ();
+        SpriteRenderer waveSprite = pWaveClear[(int) WAVECLEAR.WAVE].GetComponent<SpriteRenderer>();
         var waveColor = waveSprite.color;
         waveColor.a = 1.0f - overAlpha;
         waveSprite.color = waveColor;
-        pWaveClear [(int)WAVECLEAR.WAVE].transform.position = new Vector3 (-1.37f - (waveClearPosXConst - waveClearPosX),0.0f,0.0f);
+        pWaveClear[(int) WAVECLEAR.WAVE].transform.position =
+            new Vector3(-1.37f - (waveClearPosXConst - waveClearPosX), 0.0f, 0.0f);
 
-        SpriteRenderer clearSprite = pWaveClear [(int)WAVECLEAR.CLEAR].GetComponent<SpriteRenderer> ();
+        SpriteRenderer clearSprite = pWaveClear[(int) WAVECLEAR.CLEAR].GetComponent<SpriteRenderer>();
         var clearColor = clearSprite.color;
         clearColor.a = 1.0f - overAlpha;
         clearSprite.color = clearColor;
-        pWaveClear [(int)WAVECLEAR.CLEAR].transform.position = new Vector3 (1.54f + (waveClearPosXConst - waveClearPosX),0.0f,0.0f);
+        pWaveClear[(int) WAVECLEAR.CLEAR].transform.position =
+            new Vector3(1.54f + (waveClearPosXConst - waveClearPosX), 0.0f, 0.0f);
 
-        SpriteRenderer nowSprite = pWaveClear [nowWave + 3].GetComponent<SpriteRenderer> ();
+        SpriteRenderer nowSprite = pWaveClear[nowWave + 3].GetComponent<SpriteRenderer>();
         var nowColor = nowSprite.color;
         nowColor.a = 1.0f - overAlpha;
         nowSprite.color = nowColor;
 
-        pWaveClear [nowWave + 3].transform.position = new Vector3 (0.0f,0.0f,0.0f);
+        pWaveClear[nowWave + 3].transform.position = new Vector3(0.0f, 0.0f, 0.0f);
 
 
-
-
-        if (waveClearTime >= 150) 
+        if (waveClearTime >= 150)
         {
             isWaveClear = false;
             waveClearTime = 0;
@@ -158,12 +170,9 @@ public class StageManager : SingletonBase<StageManager>
             waveClearPosX = waveClearDistance;
             waveClearPosXConst = waveClearDistance;
 
-
-            NextWave ();
+            GameScript.instance.PrepareForNextTurn();
+            NextWave();
         }
-
-
-
     }
 
 
@@ -248,18 +257,6 @@ public class StageManager : SingletonBase<StageManager>
 
     public void NextWave()
     {
-        if (allEnemyInStage != null) Destroy(allEnemyInStage);
-//        Debug.Log("wave   " + nowWave);
-        if (nowWave >= maxWaveCnt)
-        {
-            GameScript.instance.GameClear();
-            return;
-        }
-
-
-
-
-
         //次のWAVEの敵を出す。
         allEnemyInStage = Instantiate
         (
@@ -277,7 +274,6 @@ public class StageManager : SingletonBase<StageManager>
 //        }
         //Debug.Log ("WAVEStart!!!!!!!!");
         nowWave++;
-
 //              Debug.Log ("Waveエネミー生成完了");
     }
 

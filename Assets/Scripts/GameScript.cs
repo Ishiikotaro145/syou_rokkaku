@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 public class GameScript : MonoBehaviour
 {
     public static GameScript instance;
+
     public GameObject hearts;
+    public GameObject Tutor;
+
 //    public GameObject chargeBar;
     public GameObject tapToStart;
     public GameObject gameOverUI;
@@ -19,10 +22,13 @@ public class GameScript : MonoBehaviour
 
     private GameObject[] heartArray;
     private int score;
+
     private int life = 3;
-    private bool gameStart;
-    private bool gameOver;
-    private bool gameReset = true;
+
+//    private bool gameStart;
+    private bool gameClear;
+    private bool readyToStart;
+    private bool isMouseDown;
     private BallScript playerInstance;
 
     private float chargeStartTime;
@@ -42,68 +48,79 @@ public class GameScript : MonoBehaviour
             hearts.transform.GetChild(0).gameObject, hearts.transform.GetChild(1).gameObject,
             hearts.transform.GetChild(2).gameObject
         };
-        playerInstance = Instantiate(player, new Vector2(0, startYusyaPositionY), Quaternion.FromToRotation(Vector3.right, Vector3.up))
+        playerInstance = Instantiate(player, new Vector2(0, startYusyaPositionY),
+                Quaternion.FromToRotation(Vector3.right, Vector3.up))
             .GetComponent<BallScript>();
+
+        StageManager.GetInstance.GameStart();
+        if (PlayerPrefs.GetInt("FirstTime", 1) == 1)
+        {
+            StartCoroutine("OpenTutor");
+        }
+        else PrepareForNextTurn();
+
 //        playerInstance.transform.rotation = Quaternion.FromToRotation(Vector3.right, Vector3.up);
 //        chargeBarImage = chargeBar.GetComponent<Image>();
     }
 
     public void LifeLoss()
     {
-        if (life == 0) return;
+        if (life == 0 || gameClear) return;
         life--;
         heartArray[life].SetActive(false);
-        gameStart = false;
-        gameReset = true;
 //        chargeBar.transform.localScale = new Vector2(0, 1);
         if (life == 0)
         {
             gameOverUI.SetActive(true);
-            gameOver = true;
+            GuideLines.instance.RemoveAll();
             StartCoroutine("NextScene");
         }
         else
         {
-            Destroy(playerInstance.gameObject);
             speed = startYusyaSpeed;
 //            StageManager.GetInstance.RestorePassableImmediately();
             GuideLines.instance.RemoveAll();
             StoveScript.instance.Reset();
-            tapToStart.SetActive(true);
             playerInstance =
-                Instantiate(player, new Vector2(0, startYusyaPositionY), Quaternion.FromToRotation(Vector3.right, Vector3.up))
+                Instantiate(player, new Vector2(0, startYusyaPositionY),
+                        Quaternion.FromToRotation(Vector3.right, Vector3.up))
                     .GetComponent<BallScript>();
+            PrepareForNextTurn();
         }
     }
 
     public void WaveClear()
     {
-        gameStart = false;
-        gameReset = true;
+//        StageManager.GetInstance.SetWaveClear(); 
         speed = playerInstance.GetCurrentSpeed();
         Destroy(playerInstance.gameObject);
-        
+
 //        StageManager.GetInstance.RestorePassableImmediately();
         GuideLines.instance.RemoveAll();
 //        StoveScript.instance.Reset();
-        tapToStart.SetActive(true);
         playerInstance =
-            Instantiate(player, new Vector2(0, startYusyaPositionY), Quaternion.FromToRotation(Vector3.right, Vector3.up))
+            Instantiate(player, new Vector2(0, startYusyaPositionY),
+                    Quaternion.FromToRotation(Vector3.right, Vector3.up))
                 .GetComponent<BallScript>();
     }
-    
+
     private void Update()
     {
-        if (gameReset && Input.GetMouseButtonDown(0))
+        if (Tutor.active && Input.GetMouseButtonUp(0))
+        {
+            StartCoroutine("CloseTutor");
+        }
+
+        if (!isMouseDown && Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject()) return;
-            gameReset = false;
+            isMouseDown = true;
         }
-        else if (!gameStart && !gameOver && !gameReset && Input.GetMouseButtonUp(0))
+        else if (readyToStart && isMouseDown && Input.GetMouseButtonUp(0))
         {
             tapToStart.SetActive(false);
             StartCoroutine("GameStart");
-            gameStart = true;
+            readyToStart = false;
         }
 
 //        else if (gameStart && !gameReset)
@@ -123,31 +140,40 @@ public class GameScript : MonoBehaviour
 //        }
     }
 
+    IEnumerator OpenTutor()
+    { 
+        yield return new WaitForSeconds(.5f);
+        Tutor.SetActive(true);
+    }
+    
+    IEnumerator CloseTutor()
+    {
+        Tutor.SetActive(false);
+        yield return new WaitForSeconds(.5f);
+        PrepareForNextTurn();
+    }
+    public void PrepareForNextTurn()
+    {
+        tapToStart.SetActive(true);
+        readyToStart = true;
+        isMouseDown = false;
+    }
+
     public void GameClear()
     {
         clearUI.active = true;
-        StartCoroutine("NextScene");
+        gameClear = true;
+//        StartCoroutine("NextScene");
     }
 
-//    public void ScorePlusOne()
-//    {
-//        text.text = (++score).ToString();
-//    }
-//
-//    public void ScoreAnimation()
-//    {
-//        animator.SetTrigger("BallOut");
-//    }
     private IEnumerator NextScene()
     {
-        Time.timeScale = 1;
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("StageSelect");
+        yield return new WaitForSecondsRealtime(3f);
+        GoToMenu();
     }
 
     private IEnumerator GameStart()
     {
-        StageManager.GetInstance.GameStart();
         yield return new WaitForSeconds(.5f);
 //        yield return new WaitForSeconds(.5f);
 //        playerInstance = Instantiate(player, new Vector2(0, -2f), Quaternion.identity).GetComponent<BallScript>();
@@ -170,7 +196,7 @@ public class GameScript : MonoBehaviour
     }
 
     public void Restart()
-    { 
+    {
         Time.timeScale = 1;
         SceneManager.LoadScene("Main");
     }
