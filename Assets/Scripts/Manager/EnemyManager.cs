@@ -21,14 +21,7 @@ public class EnemyManager : SingletonBase<EnemyManager>
         }
 
 //		DontDestroyOnLoad (this.gameObject);
-    }
-
-
-    void Update()
-    {
-        Debug.Log(nowEnemyCnt);
-    }
-
+    } 
 
     public void TellSpawn()
     {

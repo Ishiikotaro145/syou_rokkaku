@@ -3619,7 +3619,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hearts: {fileID: 2106155383}
-  chargeBar: {fileID: 0}
   tapToStart: {fileID: 653465528}
   gameOverUI: {fileID: 1129863951}
   clearUI: {fileID: 171174628}

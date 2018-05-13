@@ -6,6 +6,7 @@ public class BlowEnemy : EnemyBase
 {
     private Rigidbody2D _rigidbody2D;
     public GameObject ParticlePrefab;
+    public GameObject HitOthersPrefab;
     public GameObject LaserPrefab;
 
     public int hitWallTimes = 1;
@@ -22,7 +23,9 @@ public class BlowEnemy : EnemyBase
     {
         if (o.CompareTag("Enemy"))
         {
+            Debug.Log("HitOthers");
             o.gameObject.GetComponent<EnemyBase>().HitByPlayer(_rigidbody2D.velocity);
+            Instantiate(HitOthersPrefab, transform.position, Quaternion.identity);
         }
         else if (o.CompareTag("StoveMouth"))
         {
@@ -36,7 +39,9 @@ public class BlowEnemy : EnemyBase
     {
         if (o.collider.CompareTag("Enemy"))
         {
+            Debug.Log("HitOthers");
             o.gameObject.GetComponent<EnemyBase>().HitByPlayer(_rigidbody2D.velocity);
+            Instantiate(HitOthersPrefab, transform.position, Quaternion.identity);
         }
         else if (o.collider.CompareTag("Stove"))
         {
@@ -80,7 +85,7 @@ public class BlowEnemy : EnemyBase
     void Update()
     {
         if (!isDead) return;
-        transform.Rotate(0, 0, 720 * Time.deltaTime);
+        transform.Rotate(0, 0, 2160 * Time.deltaTime);
 
         Damage();
     }
