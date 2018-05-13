@@ -11,11 +11,11 @@ public abstract class EnemyBase : MonoBehaviour
     protected int currentHP;
     protected Transform hpBar;
     protected bool startFinish;
-    private bool isPassable;
+//    private bool isPassable;
     private CircleCollider2D _collider2D;
 
     //アニメーションが無いため仮　それっぽく魅せる演出用の変数
-    float addScale = 3.0f;
+//    float addScale = 3.0f;
     float alpha = 1.0f;
 
     //ダメージ受けた時に点滅させるのに必要な変数
@@ -26,7 +26,7 @@ public abstract class EnemyBase : MonoBehaviour
     void Awake()
     {
         _collider2D = GetComponent<CircleCollider2D>();
-        isPassable = _collider2D.isTrigger;
+//        isPassable = _collider2D.isTrigger;
     }
 
     // Use this for initialization
@@ -75,9 +75,9 @@ public abstract class EnemyBase : MonoBehaviour
 
     public abstract bool HitByPlayer(Vector2 speed);
 
-    public void TriggerPassableWhenNecessary()
-    {
-        if (isPassable) return;
-        _collider2D.isTrigger = !_collider2D.isTrigger;
-    }
+//    public void TriggerPassableWhenNecessary()
+//    {
+//        if (isPassable) return;
+//        _collider2D.isTrigger = !_collider2D.isTrigger;
+//    }
 }

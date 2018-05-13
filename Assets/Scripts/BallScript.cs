@@ -58,7 +58,7 @@ public class BallScript : MonoBehaviour
         else if (o.CompareTag("StoveMouth"))
         {
             Instantiate(LaserPrefab, transform.position, Quaternion.identity);
-            UIScript.instance.LifeLoss();
+            GameScript.instance.LifeLoss();
             Destroy(gameObject);
         }
 
@@ -86,8 +86,7 @@ public class BallScript : MonoBehaviour
         }
         else if (o.collider.CompareTag("Stove"))
         {
-            if (StoveScript.instance.HitStoveWall(_rigidbody2D.velocity.magnitude))
-                o.gameObject.SetActive(false);
+            o.gameObject.GetComponent<WallScript>().Hit(currentSpeed);
         }
     }
 

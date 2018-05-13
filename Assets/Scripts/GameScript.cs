@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class UIScript : MonoBehaviour
+public class GameScript : MonoBehaviour
 {
-    public static UIScript instance;
+    public static GameScript instance;
     public GameObject hearts;
-    public GameObject chargeBar;
+//    public GameObject chargeBar;
     public GameObject tapToStart;
     public GameObject gameOverUI;
     public GameObject clearUI;
@@ -52,13 +52,13 @@ public class UIScript : MonoBehaviour
     {
         if (life == 0) return;
         life--;
-        heartArray[life].active = false;
+        heartArray[life].SetActive(false);
         gameStart = false;
         gameReset = true;
-        chargeBar.transform.localScale = new Vector2(0, 1);
+//        chargeBar.transform.localScale = new Vector2(0, 1);
         if (life == 0)
         {
-            gameOverUI.active = true;
+            gameOverUI.SetActive(true);
             gameOver = true;
             StartCoroutine("NextScene");
         }
@@ -66,10 +66,10 @@ public class UIScript : MonoBehaviour
         {
             Destroy(playerInstance.gameObject);
             speed = startYusyaSpeed;
-            StageManager.GetInstance.RestorePassableImmediately();
+//            StageManager.GetInstance.RestorePassableImmediately();
             GuideLines.instance.RemoveAll();
             StoveScript.instance.Reset();
-            tapToStart.active = true;
+            tapToStart.SetActive(true);
             playerInstance =
                 Instantiate(player, new Vector2(0, startYusyaPositionY), Quaternion.FromToRotation(Vector3.right, Vector3.up))
                     .GetComponent<BallScript>();
@@ -86,7 +86,7 @@ public class UIScript : MonoBehaviour
 //        StageManager.GetInstance.RestorePassableImmediately();
         GuideLines.instance.RemoveAll();
 //        StoveScript.instance.Reset();
-        tapToStart.active = true;
+        tapToStart.SetActive(true);
         playerInstance =
             Instantiate(player, new Vector2(0, startYusyaPositionY), Quaternion.FromToRotation(Vector3.right, Vector3.up))
                 .GetComponent<BallScript>();
@@ -101,9 +101,8 @@ public class UIScript : MonoBehaviour
         }
         else if (!gameStart && !gameOver && !gameReset && Input.GetMouseButtonUp(0))
         {
-            tapToStart.active = false;
+            tapToStart.SetActive(false);
             StartCoroutine("GameStart");
-
             gameStart = true;
         }
 
@@ -148,8 +147,8 @@ public class UIScript : MonoBehaviour
 
     private IEnumerator GameStart()
     {
-        yield return new WaitForSeconds(.5f);
         StageManager.GetInstance.GameStart();
+        yield return new WaitForSeconds(.5f);
 //        yield return new WaitForSeconds(.5f);
 //        playerInstance = Instantiate(player, new Vector2(0, -2f), Quaternion.identity).GetComponent<BallScript>();
         playerInstance.GameStart(speed);
