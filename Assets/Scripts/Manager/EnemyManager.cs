@@ -34,7 +34,7 @@ public class EnemyManager : SingletonBase<EnemyManager>
         nowEnemyCnt--;
         if (nowEnemyCnt == 0)
         {
-            GameScript.instance.WaveClear();
+//            GameScript.instance.WaveClear();
             StageManager.GetInstance.SetWaveClear();
         }
     }

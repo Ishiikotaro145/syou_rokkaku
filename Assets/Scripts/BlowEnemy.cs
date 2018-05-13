@@ -23,7 +23,7 @@ public class BlowEnemy : EnemyBase
     {
         if (o.CompareTag("Enemy"))
         {
-            Debug.Log("HitOthers");
+//            Debug.Log("HitOthers");
             o.gameObject.GetComponent<EnemyBase>().HitByPlayer(_rigidbody2D.velocity);
             Instantiate(HitOthersPrefab, transform.position, Quaternion.identity);
         }
@@ -39,7 +39,7 @@ public class BlowEnemy : EnemyBase
     {
         if (o.collider.CompareTag("Enemy"))
         {
-            Debug.Log("HitOthers");
+//            Debug.Log("HitOthers");
             o.gameObject.GetComponent<EnemyBase>().HitByPlayer(_rigidbody2D.velocity);
             Instantiate(HitOthersPrefab, transform.position, Quaternion.identity);
         }

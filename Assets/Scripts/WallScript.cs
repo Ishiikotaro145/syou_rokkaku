@@ -57,7 +57,7 @@ public class WallScript : MonoBehaviour
         }
 
         _spriteRenderer.sprite = Sprites[SpritePercentages.Length];
-        if (percentage < BlinkPercentage) _animator.SetTrigger("Blink");
+        if (percentage < BlinkPercentage) _animator.SetBool("Blink", true);
         return true;
     }
 
@@ -66,6 +66,6 @@ public class WallScript : MonoBehaviour
         if (!gameObject.active) gameObject.SetActive(true);
         currentHP = MaxHp;
         _spriteRenderer.sprite = Sprites[0];
-        _animator.ResetTrigger("Blink");
+        _animator.SetBool("Blink", false);
     }
 }
