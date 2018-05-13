@@ -4,53 +4,59 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Title : MonoBehaviour {
+public class Title : MonoBehaviour
+{
+    private AudioSource _audioSource;
+    public Text pTapStartText;
+    float textAlpha = 1.0f;
 
-	public Text pTapStartText;
-	float textAlpha = 1.0f;
-	bool isAlphaUp = false;
-	// Use this for initialization
-	void Start () 
-	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		if (isAlphaUp == false) 
-		{
-			textAlpha-=0.01f;
-			if (textAlpha <= 0.5f) 
-			{
-				isAlphaUp = true;
-			}
+    bool isAlphaUp = false;
 
-		}
-		else
-		{
-			textAlpha+=0.01f;
-			if (textAlpha >= 1.0f) 
-			{
-				isAlphaUp = false;
-			}
-		}
+    // Use this for initialization
+    void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
-		pTapStartText.color = new Vector4 (1.0f,1.0f,1.0f,textAlpha);
+    // Update is called once per frame
+    void Update()
+    {
+        if (isAlphaUp == false)
+        {
+            textAlpha -= 0.01f;
+            if (textAlpha <= 0.5f)
+            {
+                isAlphaUp = true;
+            }
+        }
+        else
+        {
+            textAlpha += 0.01f;
+            if (textAlpha >= 1.0f)
+            {
+                isAlphaUp = false;
+            }
+        }
 
-
-		ChackTap ();
-
-	}
+        pTapStartText.color = new Vector4(1.0f, 1.0f, 1.0f, textAlpha);
 
 
-	void ChackTap()
-	{
-		if(Input.GetMouseButtonDown(0))
-		{
-			Application.LoadLevel ("StageSelect");
-		}
+        ChackTap();
+    }
 
 
-	}
+    void ChackTap()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _audioSource.Play();
+            StartCoroutine("LoadScene");
+        }
+    }
+
+    IEnumerator LoadScene()
+    {
+        yield return new WaitForSeconds(.5f);
+        Application.LoadLevel("StageSelect");
+    }
 }

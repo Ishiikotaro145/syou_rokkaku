@@ -8,8 +8,11 @@ public class BlowEnemy : EnemyBase
     public GameObject ParticlePrefab;
     public GameObject HitOthersPrefab;
     public GameObject LaserPrefab;
+    public AudioClip dieIn;
+    public AudioClip dieOut;
 
     public int hitWallTimes = 1;
+    private AudioSource _audioSource;
 
     private bool isDead;
 
@@ -17,6 +20,7 @@ public class BlowEnemy : EnemyBase
     {
         base.Start();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void OnTriggerEnter2D(Collider2D o)
@@ -30,6 +34,7 @@ public class BlowEnemy : EnemyBase
         else if (o.CompareTag("StoveMouth"))
         {
             Instantiate(LaserPrefab, transform.position, Quaternion.identity);
+            _audioSource.PlayOneShot(dieOut);
             EnemyManager.GetInstance.TellDead(); 
             Destroy(gameObject);
         }
@@ -49,6 +54,7 @@ public class BlowEnemy : EnemyBase
             if (hitWallTimes == 0)
             {
                 Instantiate(ParticlePrefab, transform.position, Quaternion.identity);
+                _audioSource.PlayOneShot(dieIn);
                 EnemyManager.GetInstance.TellDead(); 
                 Destroy(gameObject);
             }

@@ -120,7 +120,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -311,6 +311,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf6d6f5e893e4548be950b3326fe526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpA: {fileID: 8300000, guid: 67a62c0ca73244600ba3d00e8f5d70f9, type: 3}
+  ThroughA: {fileID: 8300000, guid: 8e49e019d214319429b088df16091291, type: 3}
+  ReflectA: {fileID: 8300000, guid: bf13f550b4f3d214cad9b111aead8f0a, type: 3}
   Slash: {fileID: 1931391723872664, guid: 8690041cf7250174eb66ceb76d6bf32a, type: 2}
   LaserPrefab: {fileID: 1812881953744270, guid: ed0c022a338d3384d9ee622d354a94e2,
     type: 2}

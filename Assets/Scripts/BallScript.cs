@@ -5,7 +5,10 @@ using UnityEngine;
 public class BallScript : MonoBehaviour
 {
     public static BallScript instance;
-
+    public AudioClip JumpA;
+    public AudioClip ThroughA;
+    public AudioClip ReflectA;
+    
     public GameObject Slash;
 
     // public GameObject ShockWave;
@@ -19,6 +22,7 @@ public class BallScript : MonoBehaviour
 
     private bool gameStart;
     private SpriteRenderer _spriteRenderer;
+    private AudioSource _audioSource;
 
     private void Start()
     {
@@ -26,6 +30,7 @@ public class BallScript : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     public void GameStart(float speed)
@@ -44,6 +49,7 @@ public class BallScript : MonoBehaviour
         if (o.CompareTag("Enemy"))
         {
             EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
+            _audioSource.PlayOneShot(ThroughA);
             _animator.SetTrigger("Attack");
 
             if (enemyBase.HitByPlayer(_rigidbody2D.velocity))
@@ -73,6 +79,7 @@ public class BallScript : MonoBehaviour
         if (o.collider.CompareTag("Enemy"))
         {
             EnemyBase enemyBase = o.gameObject.GetComponent<EnemyBase>();
+            _audioSource.PlayOneShot(ReflectA);
             _animator.SetTrigger("Attack");
 
             if (enemyBase.HitByPlayer(_rigidbody2D.velocity))
@@ -87,6 +94,7 @@ public class BallScript : MonoBehaviour
         else if (o.collider.CompareTag("Stove"))
         {
             o.gameObject.GetComponent<WallScript>().Hit(currentSpeed);
+            _audioSource.PlayOneShot(JumpA);
         }
     }
 
@@ -156,9 +164,9 @@ public class BallScript : MonoBehaviour
     //         .SetSpeed(2 * _rigidbody2D.velocity);
     // }
 
-    public void SetPassable(bool passable)
-    {
-        if (passable) _spriteRenderer.color = new Color(1, 1, 1, 0.5f);
-        else _spriteRenderer.color = new Color(1, 1, 1, 1);
-    }
+//    public void SetPassable(bool passable)
+//    {
+//        if (passable) _spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+//        else _spriteRenderer.color = new Color(1, 1, 1, 1);
+//    }
 }
