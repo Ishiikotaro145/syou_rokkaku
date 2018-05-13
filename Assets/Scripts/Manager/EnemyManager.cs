@@ -39,6 +39,10 @@ public class EnemyManager : SingletonBase<EnemyManager>
     public void TellDead()
     {
         nowEnemyCnt--;
-        if (nowEnemyCnt == 0) StageManager.GetInstance.SetWaveClear();
+        if (nowEnemyCnt == 0)
+        {
+            UIScript.instance.WaveClear();
+            StageManager.GetInstance.SetWaveClear();
+        }
     }
 }

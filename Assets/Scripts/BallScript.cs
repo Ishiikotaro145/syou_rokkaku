@@ -5,9 +5,13 @@ using UnityEngine;
 public class BallScript : MonoBehaviour
 {
     public static BallScript instance;
+
     public GameObject Slash;
+
     // public GameObject ShockWave;
     public GameObject LaserPrefab;
+    public float maxSpeed = 6;
+    private float currentSpeed;
     private const float BallSize = .35f;
     private Rigidbody2D _rigidbody2D;
 
@@ -24,12 +28,17 @@ public class BallScript : MonoBehaviour
         _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
-    public void GameStart()
+    public void GameStart(float speed)
     {
-        _rigidbody2D.velocity = Vector2.up * 3;
+        currentSpeed = speed;
+        _rigidbody2D.velocity = Vector2.up * currentSpeed;
         gameStart = true;
     }
 
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
+    }
     void OnTriggerEnter2D(Collider2D o)
     {
         if (o.CompareTag("Enemy"))
@@ -42,7 +51,9 @@ public class BallScript : MonoBehaviour
 
             //StopCoroutine("SlowDown");
             //StartCoroutine("SlowDown", 0.4f);
-            _rigidbody2D.velocity = _rigidbody2D.velocity + _rigidbody2D.velocity.normalized * .03f;
+            currentSpeed += .03f;
+            if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
+            _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
         }
         else if (o.CompareTag("StoveMouth"))
         {
@@ -69,7 +80,9 @@ public class BallScript : MonoBehaviour
 
             //StopCoroutine("SlowDown");
             //StartCoroutine("SlowDown", 0.2f);
-            _rigidbody2D.velocity = _rigidbody2D.velocity + _rigidbody2D.velocity.normalized * .06f;
+            currentSpeed += .06f;
+            if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
+            _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
         }
         else if (o.collider.CompareTag("Stove"))
         {
@@ -77,7 +90,7 @@ public class BallScript : MonoBehaviour
                 o.gameObject.SetActive(false);
         }
     }
- 
+
     void LateUpdate()
     {
         if (!gameStart) return;
