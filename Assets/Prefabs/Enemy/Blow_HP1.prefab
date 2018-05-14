@@ -83,7 +83,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1919587380142706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.423, y: 0.201, z: 0}
+  m_LocalPosition: {x: -6.5281024, y: -2.747516, z: 0}
   m_LocalScale: {x: 0.04, y: 0.04, z: 1}
   m_Children:
   - {fileID: 4626758119215498}
@@ -206,7 +206,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -232,13 +232,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 1
   exp: 5
-  ParticlePrefab: {fileID: 1446476875114508, guid: c08f173f7e0cb4f78b544e56d39e0b95,
+  ParticlePrefab: {fileID: 1310281885280906, guid: 8a11d5a8d1da39d4b993f15b5d613d88,
     type: 2}
-  HitOthersPrefab: {fileID: 1760992571876156, guid: bfbb1577c0cf6194893d32135866cd83,
+  HitOthersPrefab: {fileID: 1310281885280906, guid: 8a11d5a8d1da39d4b993f15b5d613d88,
     type: 2}
-  LaserPrefab: {fileID: 1812881953744270, guid: ed0c022a338d3384d9ee622d354a94e2,
+  LaserPrefab: {fileID: 1310281885280906, guid: 8a11d5a8d1da39d4b993f15b5d613d88,
     type: 2}
-  dieIn: {fileID: 8300000, guid: b62a1138e425eb64aa627feaaf69d013, type: 3}
+  dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hitWallTimes: 1
 --- !u!212 &212314214269187856

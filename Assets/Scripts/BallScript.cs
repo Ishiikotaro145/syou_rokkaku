@@ -57,7 +57,7 @@ public class BallScript : MonoBehaviour
 
             //StopCoroutine("SlowDown");
             //StartCoroutine("SlowDown", 0.4f);
-            currentSpeed += .03f;
+            currentSpeed += .06f;
             if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
             _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
         }
@@ -87,7 +87,7 @@ public class BallScript : MonoBehaviour
 
             //StopCoroutine("SlowDown");
             //StartCoroutine("SlowDown", 0.2f);
-            currentSpeed += .06f;
+            currentSpeed += .09f;
             if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
             _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
         }
