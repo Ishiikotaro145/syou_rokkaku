@@ -688,6 +688,7 @@ MonoBehaviour:
   dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  reflect: {fileID: 8300000, guid: 67a62c0ca73244600ba3d00e8f5d70f9, type: 3}
   hitWallTimes: 8
 --- !u!114 &114889167656080376
 MonoBehaviour:
@@ -711,6 +712,7 @@ MonoBehaviour:
   dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  reflect: {fileID: 8300000, guid: 67a62c0ca73244600ba3d00e8f5d70f9, type: 3}
   hitWallTimes: 8
 --- !u!114 &114953419363735578
 MonoBehaviour:
@@ -734,6 +736,7 @@ MonoBehaviour:
   dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  reflect: {fileID: 8300000, guid: 67a62c0ca73244600ba3d00e8f5d70f9, type: 3}
   hitWallTimes: 8
 --- !u!212 &212162687889597562
 SpriteRenderer:

@@ -11,24 +11,23 @@ public class BlowEnemy : EnemyBase
     public AudioClip dieIn;
     public AudioClip dieOut;
     public AudioClip hit;
+    public AudioClip reflect;
 
-    public int hitWallTimes = 1;
-    private AudioSource _audioSource;
+    public int hitWallTimes = 1; 
 
     private bool isDead;
 
     new void Start()
     {
         base.Start();
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        _audioSource = GetComponent<AudioSource>();
+        _rigidbody2D = GetComponent<Rigidbody2D>(); 
     }
 
     void OnTriggerEnter2D(Collider2D o)
     {
         if (o.CompareTag("Enemy"))
         {
-            _audioSource.PlayOneShot(hit);
+            AudioScript.instance.PlayOneShot(hit);
 //            Debug.Log("HitOthers");
             o.gameObject.GetComponent<EnemyBase>().HitByPlayer(_rigidbody2D.velocity);
             Instantiate(HitOthersPrefab, transform.position, Quaternion.identity);
@@ -36,7 +35,7 @@ public class BlowEnemy : EnemyBase
         else if (o.CompareTag("StoveMouth"))
         {
             Instantiate(LaserPrefab, transform.position, Quaternion.identity);
-            _audioSource.PlayOneShot(dieOut);
+            AudioScript.instance.PlayOneShot(dieOut);
             EnemyManager.GetInstance.TellDead(); 
             Destroy(gameObject);
         }
@@ -47,19 +46,24 @@ public class BlowEnemy : EnemyBase
         if (o.collider.CompareTag("Enemy"))
         {
 //            Debug.Log("HitOthers");
-            _audioSource.PlayOneShot(hit);
+            AudioScript.instance.PlayOneShot(hit);
             o.gameObject.GetComponent<EnemyBase>().HitByPlayer(_rigidbody2D.velocity);
             Instantiate(HitOthersPrefab, transform.position, Quaternion.identity);
         }
         else if (o.collider.CompareTag("Stove"))
         {
+
             hitWallTimes--;
             if (hitWallTimes == 0)
             {
                 Instantiate(ParticlePrefab, transform.position, Quaternion.identity);
-                _audioSource.PlayOneShot(dieIn,1);
+                Debug.Log("dieIn");
+                AudioScript.instance.PlayOneShot(dieIn,5);
                 EnemyManager.GetInstance.TellDead(); 
                 Destroy(gameObject);
+            }
+            else{
+                AudioScript.instance.PlayOneShot(reflect);
             }
         }
     }

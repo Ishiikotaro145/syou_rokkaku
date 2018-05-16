@@ -17,15 +17,13 @@ public class WallScript : MonoBehaviour
     private int currentHP;
 
     private SpriteRenderer _spriteRenderer;
-    private Animator _animator;
-private AudioSource audioSource;
+    private Animator _animator; 
     // Use this for initialization
     void Start()
     {
         currentHP = MaxHp;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-        audioSource=GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -39,7 +37,7 @@ private AudioSource audioSource;
         currentHP--;
         if (currentHP == 0)
         {
-            audioSource.PlayOneShot(broken,10);
+            AudioScript.instance.PlayOneShot(broken,5);
             Instantiate(ParticlePrefab,transform.position,Quaternion.identity);
             gameObject.SetActive(false);
             return true;
