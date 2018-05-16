@@ -62,9 +62,9 @@ public void GameStop(){
 
             // StopCoroutine("SlowDown");
             // StartCoroutine("SlowDown", 0.4f);
-            currentSpeed += .06f;
-            if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
-            _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
+            // currentSpeed += .06f;
+            // if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
+            // _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
         }
         else if (o.CompareTag("StoveMouth"))
         {
@@ -94,14 +94,17 @@ public void GameStop(){
 
             // StopCoroutine("SlowDown");
             // StartCoroutine("SlowDown", 0.ß2f);
-            currentSpeed += .09f;
-            if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
-            _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
+            // currentSpeed += .09f;
+            // if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
+            // _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
         }
         else if (o.collider.CompareTag("Stove"))
         {
             o.gameObject.GetComponent<WallScript>().Hit(currentSpeed);
             _audioSource.PlayOneShot(JumpA);
+            currentSpeed += .09f;
+            if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
+            _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
         }
     }
 
