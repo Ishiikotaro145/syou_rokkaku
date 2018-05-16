@@ -240,6 +240,7 @@ MonoBehaviour:
     type: 2}
   dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hitWallTimes: 8
 --- !u!212 &212321328033407488
 SpriteRenderer:

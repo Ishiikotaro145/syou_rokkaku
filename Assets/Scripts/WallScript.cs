@@ -5,6 +5,8 @@ using UnityEngine;
 public class WallScript : MonoBehaviour
 {
     public Sprite[] Sprites;
+    public AudioClip broken;
+    public GameObject ParticlePrefab;
 
     public float[] SpritePercentages = new[] {.85f, .7f, .45f, .3f, .15f};
     public float BlinkPercentage = .1f;
@@ -16,13 +18,14 @@ public class WallScript : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
-
+private AudioSource audioSource;
     // Use this for initialization
     void Start()
     {
         currentHP = MaxHp;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        audioSource=GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,6 +39,8 @@ public class WallScript : MonoBehaviour
         currentHP--;
         if (currentHP == 0)
         {
+            audioSource.PlayOneShot(broken,10);
+            Instantiate(ParticlePrefab,transform.position,Quaternion.identity);
             gameObject.SetActive(false);
             return true;
         }

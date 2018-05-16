@@ -57,6 +57,10 @@ public class StageManager : SingletonBase<StageManager>
 
 //    private bool enemyPassable;
 
+    //WAVE STARTの表示に必要なもの
+    private bool isWaveStart = false;
+    float  waveStartPos = 0.0f;
+    bool isWaveStartBay = false;
 
     //WAVE CLEARの表示に必要な画像
     const float waveClearDistance = 0.2f;
@@ -89,6 +93,22 @@ public class StageManager : SingletonBase<StageManager>
         isWaveClear = true;
     }
 
+
+    public void SetWaveStart()
+    {
+        isWaveStart = true;
+        waveStartPos = 10.0f;
+        isWaveStartBay = false;
+    }
+
+
+    public void SetWaveStartBay()
+    {
+        isWaveStartBay = true;
+        waveStartPos = -0.1f;
+    }
+
+
     void Awake()
     {
         if (this != GetInstance)
@@ -104,6 +124,8 @@ public class StageManager : SingletonBase<StageManager>
     void Update()
     {
         WaveClear();
+
+        WaveStart();
     }
 
 
@@ -173,6 +195,43 @@ public class StageManager : SingletonBase<StageManager>
             GameScript.instance.PrepareForNextTurn();
             NextWave();
         }
+    }
+
+
+        void WaveStart()
+    {
+        if (isWaveStart == false)return;
+
+        if (isWaveStartBay == false) 
+        {
+            waveStartPos *= 0.95f;
+        } 
+        else
+        {
+            waveStartPos -= 0.05f;
+            waveStartPos *= 1.4f;
+        }
+
+        //WAVE CLEAR
+        SpriteRenderer waveSprite = pWaveClear [(int)WAVECLEAR.WAVE].GetComponent<SpriteRenderer> ();
+        var waveColor = waveSprite.color;
+        waveColor.a = 1.0f;
+        waveSprite.color = waveColor;
+        pWaveClear [(int)WAVECLEAR.WAVE].transform.position = new Vector3 (waveStartPos - 0.2f,0.0f,0.0f);
+
+
+        SpriteRenderer nowSprite = pWaveClear [nowWave + 3].GetComponent<SpriteRenderer> ();
+        var nowColor = nowSprite.color;
+        nowColor.a = 1.0f;
+        nowSprite.color = nowColor;
+        pWaveClear [nowWave + 3].transform.position = new Vector3 (waveStartPos + 1.2f,0.0f,0.0f);
+
+
+        if(waveStartPos < -10.0f)
+        {
+            isWaveStart = false;
+        }
+        Debug.Log(waveStartPos);
     }
 
 
@@ -255,7 +314,7 @@ public class StageManager : SingletonBase<StageManager>
 //        }
 //    }
 
-    public void NextWave()
+    void NextWave()
     {
         //次のWAVEの敵を出す。
         allEnemyInStage = Instantiate
@@ -274,6 +333,7 @@ public class StageManager : SingletonBase<StageManager>
 //        }
         //Debug.Log ("WAVEStart!!!!!!!!");
         nowWave++;
+        SetWaveStart ();
 //              Debug.Log ("Waveエネミー生成完了");
     }
 

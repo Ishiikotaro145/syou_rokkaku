@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class ChangeBackSprite : MonoBehaviour
 {
+    public static ChangeBackSprite instance;
     public List<GameObject> pBackSpritePrefab;
     public List<AudioClip> bgm;
     int selectStage = 0;
-
+    AudioSource audioSource;
     // Use this for initialization
     void Start()
     {
-        AudioSource audioSource = GetComponent<AudioSource>();
+        instance=this;
+          audioSource = GetComponent<AudioSource>();
         selectStage = PlayerPrefs.GetInt("StageSelect");
         SpriteRenderer sprite = null;
         if (selectStage >= 0 && selectStage < 3)
@@ -39,8 +41,7 @@ public class ChangeBackSprite : MonoBehaviour
     }
 
 
-    // Update is called once per frame
-    void Update()
-    {
+    public void StopBGM(){
+        audioSource.Stop();
     }
 }

@@ -1,6 +1,7 @@
-﻿using System.Collections;
+﻿
 using System.Linq.Expressions;
 using UnityEngine;
+using System.Collections;
 
 public class BallScript : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class BallScript : MonoBehaviour
     public GameObject LaserPrefab;
     public float maxSpeed = 6;
     private float currentSpeed;
-    private const float BallSize = .35f;
+    private const float BallSize = .25f;
     private Rigidbody2D _rigidbody2D;
 
     private Animator _animator;
@@ -39,7 +40,11 @@ public class BallScript : MonoBehaviour
         _rigidbody2D.velocity = Vector2.up * currentSpeed;
         gameStart = true;
     }
-
+public void GameStop(){
+    gameStart=false;
+    _rigidbody2D.velocity =Vector3.zero;
+    GuideLines.instance.RemoveAll();
+}
     public float GetCurrentSpeed()
     {
         return currentSpeed;
@@ -55,8 +60,8 @@ public class BallScript : MonoBehaviour
             if (enemyBase.HitByPlayer(_rigidbody2D.velocity))
                 Instantiate(Slash, o.transform.position, Quaternion.identity);
 
-            //StopCoroutine("SlowDown");
-            //StartCoroutine("SlowDown", 0.4f);
+            // StopCoroutine("SlowDown");
+            // StartCoroutine("SlowDown", 0.4f);
             currentSpeed += .06f;
             if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
             _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
@@ -65,6 +70,8 @@ public class BallScript : MonoBehaviour
         {
             Instantiate(LaserPrefab, transform.position, Quaternion.identity);
             GameScript.instance.LifeLoss();
+            StopCoroutine("SlowDown");
+            Time.timeScale=1;
             Destroy(gameObject);
         }
 
@@ -85,8 +92,8 @@ public class BallScript : MonoBehaviour
             if (enemyBase.HitByPlayer(_rigidbody2D.velocity))
                 Instantiate(Slash, o.transform.position, Quaternion.identity);
 
-            //StopCoroutine("SlowDown");
-            //StartCoroutine("SlowDown", 0.2f);
+            // StopCoroutine("SlowDown");
+            // StartCoroutine("SlowDown", 0.ß2f);
             currentSpeed += .09f;
             if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
             _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
@@ -106,7 +113,7 @@ public class BallScript : MonoBehaviour
         // Guide Line
 
         GuideLines.instance.RemoveAll();
-        float remainLength = 4;
+        float remainLength = 0f;
         Vector2 lineSpeed = _rigidbody2D.velocity;
         Vector2 linePosition = transform.position;
         RaycastHit2D[] lineHits = Physics2D.CircleCastAll(linePosition, BallSize, lineSpeed, remainLength, 1 << 9);
@@ -153,11 +160,29 @@ public class BallScript : MonoBehaviour
 
     IEnumerator SlowDown(float scale)
     {
+        // Time.timeScale = scale;
+        // yield return new WaitForSeconds(.1f);
+        // Time.timeScale = 1f;
+
+        // yield return new WaitForSecondsRealtime(.2f);
+        Time.timeScale=0;
+        yield return new WaitForSecondsRealtime(.0f);
         Time.timeScale = scale;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSecondsRealtime(.0f);
+        Time.timeScale=0;
+        yield return new WaitForSecondsRealtime(.0f);
+        Time.timeScale = scale;
+        yield return new WaitForSecondsRealtime(.0f);
+        Time.timeScale=0;
+        yield return new WaitForSecondsRealtime(.0f);
+        Time.timeScale = scale;
+        yield return new WaitForSeconds(.0f);
         Time.timeScale = 1f;
     }
-
+public void StopAllCoroutine(){
+    StopCoroutine("SlowDown");
+    Time.timeScale=1;
+}
     // public void CreateShokeWave()
     // {
     //     Instantiate(ShockWave, transform.position, transform.rotation).GetComponent<ShockWaveScript>()

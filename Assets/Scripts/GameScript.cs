@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameScript : MonoBehaviour
 {
     public static GameScript instance;
+
+public Sprite[] TutorImages;
 
     public GameObject hearts;
     public GameObject Tutor;
@@ -60,8 +63,19 @@ public class GameScript : MonoBehaviour
             .GetComponent<BallScript>();
 
         StageManager.GetInstance.GameStart();
-        if (PlayerPrefs.GetInt("FirstTime", 1) == 1)
+
+        if (PlayerPrefs.GetInt("StageSelect", 0) == 0)
         {
+            StartCoroutine("OpenTutor");
+        }
+        else if (PlayerPrefs.GetInt("StageSelect", 0) == 1)
+        {
+            Tutor.GetComponent<Image>().sprite=TutorImages[0];
+            StartCoroutine("OpenTutor");
+        }
+        else if (PlayerPrefs.GetInt("StageSelect", 0) == 2)
+        {
+            Tutor.GetComponent<Image>().sprite=TutorImages[1];
             StartCoroutine("OpenTutor");
         }
         else PrepareForNextTurn();
@@ -80,7 +94,8 @@ public class GameScript : MonoBehaviour
         if (life == 0)
         {
             gameOverUI.SetActive(true);
-            _audioSource.PlayOneShot(GameOverA);
+            ChangeBackSprite.instance.StopBGM();
+            _audioSource.PlayOneShot(GameOverA,5);
             GuideLines.instance.RemoveAll();
             StartCoroutine("NextScene");
         }
@@ -100,11 +115,11 @@ public class GameScript : MonoBehaviour
 
     public void WaveClear()
     {
-//        StageManager.GetInstance.SetWaveClear(); 
-        _audioSource.PlayOneShot(WaveClearA);
+//        StageManager.GetInstance.SetWaveClear();  
+        _audioSource.PlayOneShot(WaveClearA,5);
         speed = playerInstance.GetCurrentSpeed();
-        Destroy(playerInstance.gameObject);
-
+        playerInstance.StopAllCoroutine();
+        Destroy(playerInstance.gameObject); 
 //        StageManager.GetInstance.RestorePassableImmediately();
         GuideLines.instance.RemoveAll();
 //        StoveScript.instance.Reset();
@@ -112,6 +127,7 @@ public class GameScript : MonoBehaviour
             Instantiate(player, new Vector2(0, startYusyaPositionY),
                     Quaternion.FromToRotation(Vector3.right, Vector3.up))
                 .GetComponent<BallScript>();
+        Time.timeScale=1;
     }
 
     private void Update()
@@ -164,6 +180,7 @@ public class GameScript : MonoBehaviour
     }
     public void PrepareForNextTurn()
     {
+        Time.timeScale=1;
         tapToStart.SetActive(true);
         readyToStart = true;
         isMouseDown = false;
@@ -171,9 +188,11 @@ public class GameScript : MonoBehaviour
 
     public void GameClear()
     {
-        _audioSource.PlayOneShot(StageClearA);
+        playerInstance.GameStop();
+        ChangeBackSprite.instance.StopBGM();
+        _audioSource.PlayOneShot(StageClearA,2);
         clearUI.active = true;
-        gameClear = true;
+        gameClear = true; 
 //        StartCoroutine("NextScene");
     }
 
@@ -208,6 +227,12 @@ public class GameScript : MonoBehaviour
 
     public void Restart()
     {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Main");
+    }
+
+    public void NextStage(){
+        PlayerPrefs.SetInt("StageSelect",PlayerPrefs.GetInt("StageSelect", 0)+1);
         Time.timeScale = 1;
         SceneManager.LoadScene("Main");
     }

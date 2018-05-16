@@ -10,6 +10,7 @@ public class BlowEnemy : EnemyBase
     public GameObject LaserPrefab;
     public AudioClip dieIn;
     public AudioClip dieOut;
+    public AudioClip hit;
 
     public int hitWallTimes = 1;
     private AudioSource _audioSource;
@@ -27,6 +28,7 @@ public class BlowEnemy : EnemyBase
     {
         if (o.CompareTag("Enemy"))
         {
+            _audioSource.PlayOneShot(hit);
 //            Debug.Log("HitOthers");
             o.gameObject.GetComponent<EnemyBase>().HitByPlayer(_rigidbody2D.velocity);
             Instantiate(HitOthersPrefab, transform.position, Quaternion.identity);
@@ -45,6 +47,7 @@ public class BlowEnemy : EnemyBase
         if (o.collider.CompareTag("Enemy"))
         {
 //            Debug.Log("HitOthers");
+            _audioSource.PlayOneShot(hit);
             o.gameObject.GetComponent<EnemyBase>().HitByPlayer(_rigidbody2D.velocity);
             Instantiate(HitOthersPrefab, transform.position, Quaternion.identity);
         }
@@ -54,7 +57,7 @@ public class BlowEnemy : EnemyBase
             if (hitWallTimes == 0)
             {
                 Instantiate(ParticlePrefab, transform.position, Quaternion.identity);
-                _audioSource.PlayOneShot(dieIn);
+                _audioSource.PlayOneShot(dieIn,1);
                 EnemyManager.GetInstance.TellDead(); 
                 Destroy(gameObject);
             }
@@ -74,7 +77,7 @@ public class BlowEnemy : EnemyBase
         if (currentHP == 0)
         {
             _rigidbody2D.isKinematic = false;
-            _rigidbody2D.velocity = -2 * speed;
+            _rigidbody2D.velocity = -1.6f * speed; //吹き飛ばし速度
             gameObject.layer = 11;
             isDead = true;
 

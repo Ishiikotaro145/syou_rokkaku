@@ -90,5 +90,6 @@ public class StoveScript : MonoBehaviour
     {
         gameStart = true;
         GameStartTrigger.SetActive(false);
+        StageManager.GetInstance.SetWaveStartBay();
     }
 }

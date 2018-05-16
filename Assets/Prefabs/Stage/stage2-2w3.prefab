@@ -4385,7 +4385,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1535159025749882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0013109446, y: 0.05709958, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4895202667276620}
@@ -6399,8 +6399,9 @@ MonoBehaviour:
     type: 2}
   LaserPrefab: {fileID: 1310281885280906, guid: 8a11d5a8d1da39d4b993f15b5d613d88,
     type: 2}
-  dieIn: {fileID: 8300000, guid: b62a1138e425eb64aa627feaaf69d013, type: 3}
+  dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hitWallTimes: 1
 --- !u!114 &114086744835123304
 MonoBehaviour:
@@ -6525,8 +6526,9 @@ MonoBehaviour:
     type: 2}
   LaserPrefab: {fileID: 1310281885280906, guid: 8a11d5a8d1da39d4b993f15b5d613d88,
     type: 2}
-  dieIn: {fileID: 8300000, guid: b62a1138e425eb64aa627feaaf69d013, type: 3}
+  dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hitWallTimes: 1
 --- !u!114 &114374803837189732
 MonoBehaviour:
@@ -6562,6 +6564,7 @@ MonoBehaviour:
     type: 2}
   dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hitWallTimes: 8
 --- !u!114 &114394679641040502
 MonoBehaviour:
@@ -6610,6 +6613,7 @@ MonoBehaviour:
     type: 2}
   dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hitWallTimes: 8
 --- !u!114 &114462057745643654
 MonoBehaviour:
@@ -6630,8 +6634,9 @@ MonoBehaviour:
     type: 2}
   LaserPrefab: {fileID: 1310281885280906, guid: 8a11d5a8d1da39d4b993f15b5d613d88,
     type: 2}
-  dieIn: {fileID: 8300000, guid: b62a1138e425eb64aa627feaaf69d013, type: 3}
+  dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hitWallTimes: 1
 --- !u!114 &114472257092396476
 MonoBehaviour:
@@ -6758,6 +6763,7 @@ MonoBehaviour:
     type: 2}
   dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hitWallTimes: 8
 --- !u!114 &114613861876284656
 MonoBehaviour:
@@ -6804,8 +6810,9 @@ MonoBehaviour:
     type: 2}
   LaserPrefab: {fileID: 1310281885280906, guid: 8a11d5a8d1da39d4b993f15b5d613d88,
     type: 2}
-  dieIn: {fileID: 8300000, guid: b62a1138e425eb64aa627feaaf69d013, type: 3}
+  dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hitWallTimes: 1
 --- !u!114 &114697346556225282
 MonoBehaviour:
@@ -6867,6 +6874,7 @@ MonoBehaviour:
     type: 2}
   dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hitWallTimes: 8
 --- !u!114 &114818511670220556
 MonoBehaviour:
@@ -6939,8 +6947,9 @@ MonoBehaviour:
     type: 2}
   LaserPrefab: {fileID: 1310281885280906, guid: 8a11d5a8d1da39d4b993f15b5d613d88,
     type: 2}
-  dieIn: {fileID: 8300000, guid: b62a1138e425eb64aa627feaaf69d013, type: 3}
+  dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hitWallTimes: 1
 --- !u!114 &114880555709149042
 MonoBehaviour:
@@ -6989,6 +6998,7 @@ MonoBehaviour:
     type: 2}
   dieIn: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   dieOut: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
+  hit: {fileID: 8300000, guid: 4f396ba69a7a3104a8b81624cb2a98eb, type: 3}
   hitWallTimes: 8
 --- !u!114 &114976827426030712
 MonoBehaviour:

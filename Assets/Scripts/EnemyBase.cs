@@ -56,7 +56,7 @@ public abstract class EnemyBase : MonoBehaviour
         }
         else
         {
-            alpha = 0.0f;
+            alpha = 0.5f; //点滅
         }
         damageTime++;
         if (damageTime >= 30) 
