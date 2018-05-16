@@ -102,7 +102,7 @@ public void GameStop(){
         {
             o.gameObject.GetComponent<WallScript>().Hit(currentSpeed);
             _audioSource.PlayOneShot(JumpA);
-            currentSpeed += .09f;
+            currentSpeed += 0.3f;
             if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
             _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
         }

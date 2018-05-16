@@ -248,7 +248,7 @@ Prefab:
         type: 2}
       propertyPath: broken
       value: 
-      objectReference: {fileID: 8300000, guid: 28e56431d9b70334a991bfb50d0f8340, type: 3}
+      objectReference: {fileID: 8300000, guid: bea558834e358ff418515444d5cd84e3, type: 3}
     - target: {fileID: 114176436803417818, guid: bff42dea46f8c4ca591ec416e9167621,
         type: 2}
       propertyPath: ParticlePrefab
@@ -258,6 +258,11 @@ Prefab:
     - target: {fileID: 4135342059274810, guid: bff42dea46f8c4ca591ec416e9167621, type: 2}
       propertyPath: m_LocalScale.y
       value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 114176436803417818, guid: bff42dea46f8c4ca591ec416e9167621,
+        type: 2}
+      propertyPath: BlinkPercentage
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 82485280357045774, guid: bff42dea46f8c4ca591ec416e9167621, type: 2}
@@ -419,7 +424,7 @@ Transform:
   m_GameObject: {fileID: 260900547}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.87500006, y: 0.94921863, z: 1}
   m_Children:
   - {fileID: 748071108}
   - {fileID: 1247263345}
@@ -1034,7 +1039,7 @@ Prefab:
         type: 2}
       propertyPath: broken
       value: 
-      objectReference: {fileID: 8300000, guid: 28e56431d9b70334a991bfb50d0f8340, type: 3}
+      objectReference: {fileID: 8300000, guid: bea558834e358ff418515444d5cd84e3, type: 3}
     - target: {fileID: 114176436803417818, guid: bff42dea46f8c4ca591ec416e9167621,
         type: 2}
       propertyPath: ParticlePrefab
@@ -1044,6 +1049,11 @@ Prefab:
     - target: {fileID: 4135342059274810, guid: bff42dea46f8c4ca591ec416e9167621, type: 2}
       propertyPath: m_LocalScale.y
       value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 114176436803417818, guid: bff42dea46f8c4ca591ec416e9167621,
+        type: 2}
+      propertyPath: BlinkPercentage
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 82485280357045774, guid: bff42dea46f8c4ca591ec416e9167621, type: 2}
@@ -1184,7 +1194,7 @@ Prefab:
         type: 2}
       propertyPath: broken
       value: 
-      objectReference: {fileID: 8300000, guid: 28e56431d9b70334a991bfb50d0f8340, type: 3}
+      objectReference: {fileID: 8300000, guid: bea558834e358ff418515444d5cd84e3, type: 3}
     - target: {fileID: 114176436803417818, guid: bff42dea46f8c4ca591ec416e9167621,
         type: 2}
       propertyPath: ParticlePrefab
@@ -1194,6 +1204,11 @@ Prefab:
     - target: {fileID: 4135342059274810, guid: bff42dea46f8c4ca591ec416e9167621, type: 2}
       propertyPath: m_LocalScale.y
       value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 114176436803417818, guid: bff42dea46f8c4ca591ec416e9167621,
+        type: 2}
+      propertyPath: BlinkPercentage
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 82485280357045774, guid: bff42dea46f8c4ca591ec416e9167621, type: 2}
@@ -3058,7 +3073,7 @@ Prefab:
         type: 2}
       propertyPath: broken
       value: 
-      objectReference: {fileID: 8300000, guid: 28e56431d9b70334a991bfb50d0f8340, type: 3}
+      objectReference: {fileID: 8300000, guid: bea558834e358ff418515444d5cd84e3, type: 3}
     - target: {fileID: 114176436803417818, guid: bff42dea46f8c4ca591ec416e9167621,
         type: 2}
       propertyPath: ParticlePrefab
@@ -3068,6 +3083,11 @@ Prefab:
     - target: {fileID: 4135342059274810, guid: bff42dea46f8c4ca591ec416e9167621, type: 2}
       propertyPath: m_LocalScale.y
       value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 114176436803417818, guid: bff42dea46f8c4ca591ec416e9167621,
+        type: 2}
+      propertyPath: BlinkPercentage
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 82485280357045774, guid: bff42dea46f8c4ca591ec416e9167621, type: 2}
@@ -3545,6 +3565,16 @@ Prefab:
     - target: {fileID: 4135342059274810, guid: bff42dea46f8c4ca591ec416e9167621, type: 2}
       propertyPath: m_LocalScale.x
       value: 0.33760938
+      objectReference: {fileID: 0}
+    - target: {fileID: 114176436803417818, guid: bff42dea46f8c4ca591ec416e9167621,
+        type: 2}
+      propertyPath: broken
+      value: 
+      objectReference: {fileID: 8300000, guid: bea558834e358ff418515444d5cd84e3, type: 3}
+    - target: {fileID: 114176436803417818, guid: bff42dea46f8c4ca591ec416e9167621,
+        type: 2}
+      propertyPath: BlinkPercentage
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 82485280357045774, guid: bff42dea46f8c4ca591ec416e9167621, type: 2}
@@ -4046,7 +4076,7 @@ MonoBehaviour:
   - {fileID: 1535159025749882, guid: eb124084851af4b358d98fe42b89392f, type: 2}
   - {fileID: 1995949692709120, guid: 165385256d8ed4b3aaa2c041b507652c, type: 2}
   pStage3_1:
-  - {fileID: 1858221008297354, guid: c5bd5e0b1fb3a4db6b7079a6fb2f37ec, type: 2}
+  - {fileID: 1782399578861092, guid: 1f449ab6da4d64450aaf1270b3c73823, type: 2}
   - {fileID: 1272185989856808, guid: 996f15b37addd4bee8b27d1088455cde, type: 2}
   - {fileID: 1782399578861092, guid: 1f449ab6da4d64450aaf1270b3c73823, type: 2}
   pStage3_2:
@@ -4595,7 +4625,7 @@ Prefab:
         type: 2}
       propertyPath: broken
       value: 
-      objectReference: {fileID: 8300000, guid: 28e56431d9b70334a991bfb50d0f8340, type: 3}
+      objectReference: {fileID: 8300000, guid: bea558834e358ff418515444d5cd84e3, type: 3}
     - target: {fileID: 114176436803417818, guid: bff42dea46f8c4ca591ec416e9167621,
         type: 2}
       propertyPath: ParticlePrefab
@@ -4605,6 +4635,11 @@ Prefab:
     - target: {fileID: 4135342059274810, guid: bff42dea46f8c4ca591ec416e9167621, type: 2}
       propertyPath: m_LocalScale.y
       value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 114176436803417818, guid: bff42dea46f8c4ca591ec416e9167621,
+        type: 2}
+      propertyPath: BlinkPercentage
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 82485280357045774, guid: bff42dea46f8c4ca591ec416e9167621, type: 2}
