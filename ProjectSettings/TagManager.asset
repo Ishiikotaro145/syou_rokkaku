@@ -8,6 +8,7 @@ TagManager:
   - StoveMouth
   - GameStart
   - Enemy
+  - Item
   layers:
   - Default
   - TransparentFX

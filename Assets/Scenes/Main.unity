@@ -5232,6 +5232,8 @@ MonoBehaviour:
   WaveClearA: {fileID: 8300000, guid: 83dec76ab19ad48cf8339cf48294a2a6, type: 3}
   GameOverA: {fileID: 8300000, guid: fcbe7be9d57f1403bb02bb784fe97da3, type: 3}
   StageClearA: {fileID: 8300000, guid: b51170f8440a5466e9920e37f785254c, type: 3}
+  ItemPrefab: {fileID: 1157318792186100, guid: 4dbba150a430a4cf9980736d9cce6b69, type: 2}
+  ItemTime: 20
   tapToStart: {fileID: 653465528}
   gameOverUI: {fileID: 642747934}
   clearUI: {fileID: 209087302}
@@ -5557,6 +5559,48 @@ Transform:
   m_PrefabParentObject: {fileID: 4656566964471518, guid: fb542e5f12f2f442cbf7bcbc18084d8f,
     type: 2}
   m_PrefabInternal: {fileID: 2032962577}
+--- !u!1001 &2055244142
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4932931298942660, guid: e736bbfef13d848fc8b07705550f92db, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932931298942660, guid: e736bbfef13d848fc8b07705550f92db, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932931298942660, guid: e736bbfef13d848fc8b07705550f92db, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932931298942660, guid: e736bbfef13d848fc8b07705550f92db, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932931298942660, guid: e736bbfef13d848fc8b07705550f92db, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932931298942660, guid: e736bbfef13d848fc8b07705550f92db, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932931298942660, guid: e736bbfef13d848fc8b07705550f92db, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932931298942660, guid: e736bbfef13d848fc8b07705550f92db, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e736bbfef13d848fc8b07705550f92db, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2075154761
 GameObject:
   m_ObjectHideFlags: 0
