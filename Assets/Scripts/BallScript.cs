@@ -78,6 +78,11 @@ public void GameStop(){
             Time.timeScale=1;
             Destroy(gameObject);
         }
+        else if (o.CompareTag("Item"))
+        {
+            StoveScript.instance.RecoverWall();
+            Destroy(o.gameObject);
+        }
 
 //        else if (o.CompareTag("GameStart"))
 //        {

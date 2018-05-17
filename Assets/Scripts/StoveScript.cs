@@ -9,6 +9,7 @@ public class StoveScript : MonoBehaviour
     public GameObject GameStartTrigger;
 
     public GameObject[] Walls;
+
 //    public GameObject HPBar;
 //    public int HpPerWall;
     public float LeastSpeedToBreak;
@@ -80,6 +81,11 @@ public class StoveScript : MonoBehaviour
         gameStart = false;
         gameReset = true;
         GameStartTrigger.SetActive(true);
+        RecoverWall();
+    }
+
+    public void RecoverWall()
+    {
         foreach (var wall in Walls)
         {
             wall.GetComponent<WallScript>().Recover();

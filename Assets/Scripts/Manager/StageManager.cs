@@ -17,9 +17,10 @@ enum STAGE : int
 
 enum WAVECLEAR : int
 {
-    WAVE,
+    BATTLE,
     CLEAR,
     BACK_OVERRAY,
+    W0,
     W1,
     W2,
     W3,
@@ -29,6 +30,9 @@ enum WAVECLEAR : int
     W7,
     W8,
     W9,
+    SLASH,
+    BACKBLACK,
+    STAGE,
 }
 
 
@@ -47,6 +51,8 @@ public class StageManager : SingletonBase<StageManager>
     public List<GameObject> pWaveClear;
 
     List<GameObject> SelectStageList = new List<GameObject>();
+    List<GameObject> numList = new List<GameObject> ();
+    List<GameObject> stageNumList = new List<GameObject> ();
     private GameObject allEnemyInStage;
 
     private bool gameStart;
@@ -58,9 +64,19 @@ public class StageManager : SingletonBase<StageManager>
 //    private bool enemyPassable;
 
     //WAVE STARTの表示に必要なもの
+    const float cNumeratorScale = 1.5f;
+
     private bool isWaveStart = false;
     float  waveStartPos = 0.0f;
     bool isWaveStartBay = false;
+    float waveStartAlpha = 0.0f;
+
+    float numeratorAlpha = 0.0f;
+    float numeratorScale = 1.5f;
+    bool isNumeratorDraw = false;
+
+
+
 
     //WAVE CLEARの表示に必要な画像
     const float waveClearDistance = 0.2f;
@@ -70,7 +86,14 @@ public class StageManager : SingletonBase<StageManager>
     float overScale = 2.0f;
     float waveClearPosX = waveClearDistance;
     float waveClearPosXConst = waveClearDistance;
+    GameObject waveObject;
 
+    //Stage数やその辺の情報
+
+
+
+    //
+    public int GetNowStage(){ return nowStage; }
 
     //WAVEクリア　フラグを取得
     public bool GetisWaveClear()
@@ -97,15 +120,20 @@ public class StageManager : SingletonBase<StageManager>
     public void SetWaveStart()
     {
         isWaveStart = true;
-        waveStartPos = 10.0f;
+        waveStartPos = -10.0f;
         isWaveStartBay = false;
+
+
+
+
+
     }
 
 
     public void SetWaveStartBay()
     {
         isWaveStartBay = true;
-        waveStartPos = -0.1f;
+        waveStartPos = 0.1f;
     }
 
 
@@ -118,6 +146,39 @@ public class StageManager : SingletonBase<StageManager>
         }
 
 //        DontDestroyOnLoad(this.gameObject);
+    }
+
+
+    void Start()
+    {
+
+        //必要なインスタンス生成
+        for (int cnt = 0; cnt < 10; cnt++) 
+        {
+            GameObject num = (GameObject)Instantiate 
+                (
+                    pWaveClear[3 + cnt],
+                    transform.position,
+                    Quaternion.identity
+                );
+            numList.Add (num);
+
+            GameObject num2 = (GameObject)Instantiate 
+                (
+                    pWaveClear[3 + cnt],
+                    transform.position,
+                    Quaternion.identity
+                );
+            num2.transform.localScale = new Vector3 (0.15f,0.15f,0.15f);
+            stageNumList.Add (num2);
+        }
+        waveObject = (GameObject)Instantiate
+            (
+                pWaveClear[0],
+                transform.position,
+                Quaternion.identity
+            );
+
     }
 
 
@@ -161,12 +222,17 @@ public class StageManager : SingletonBase<StageManager>
         pWaveClear[(int) WAVECLEAR.BACK_OVERRAY].transform.localScale = new Vector3(20.0f, 2.0f - overScale, 1.0f);
 
         //WAVE CLEAR
-        SpriteRenderer waveSprite = pWaveClear[(int) WAVECLEAR.WAVE].GetComponent<SpriteRenderer>();
+
+        
+
+
+        SpriteRenderer waveSprite = waveObject.GetComponent<SpriteRenderer>();
         var waveColor = waveSprite.color;
         waveColor.a = 1.0f - overAlpha;
         waveSprite.color = waveColor;
-        pWaveClear[(int) WAVECLEAR.WAVE].transform.position =
-            new Vector3(-1.37f - (waveClearPosXConst - waveClearPosX), 0.0f, 0.0f);
+        waveObject.transform.position = new Vector3(-1.37f - (waveClearPosXConst - waveClearPosX), 0.0f, 0.0f);
+
+
 
         SpriteRenderer clearSprite = pWaveClear[(int) WAVECLEAR.CLEAR].GetComponent<SpriteRenderer>();
         var clearColor = clearSprite.color;
@@ -198,40 +264,124 @@ public class StageManager : SingletonBase<StageManager>
     }
 
 
-        void WaveStart()
+    void WaveStart()
     {
         if (isWaveStart == false)return;
 
         if (isWaveStartBay == false) 
         {
-            waveStartPos *= 0.95f;
+            waveStartPos *= 0.9f;
+            waveStartAlpha += 0.02f;
+            if (waveStartAlpha >= 0.6f) 
+            {
+                waveStartAlpha = 0.6f; 
+            }
+            if(Mathf.Abs(waveStartPos) <= 0.1f)
+            {
+                isNumeratorDraw = true;
+            }
         } 
         else
         {
-            waveStartPos -= 0.05f;
+            waveStartPos += 0.05f;
             waveStartPos *= 1.4f;
+            if (waveStartPos >= 20.0f)waveStartPos = 20.0f;
+
+
+            waveStartAlpha -= 0.02f;
+            if (waveStartAlpha <= 0.0f)
+            {
+                waveStartAlpha = 0.0f;
+                isNumeratorDraw = false;
+                numeratorScale = 1.5f;
+                numeratorAlpha = 0.0f;
+            }
         }
 
-        //WAVE CLEAR
-        SpriteRenderer waveSprite = pWaveClear [(int)WAVECLEAR.WAVE].GetComponent<SpriteRenderer> ();
+        if (isNumeratorDraw == true)
+        {
+            numeratorScale *= 0.9f;
+            numeratorAlpha += 0.05f;
+            if (numeratorAlpha >= 1.0f)numeratorAlpha = 1.0f;
+            //Debug.Log("アルファ値" + numeratorAlpha);
+        }
+
+
+
+        //WAVE
+        SpriteRenderer waveSprite = pWaveClear [(int)WAVECLEAR.BATTLE].GetComponent<SpriteRenderer> ();
         var waveColor = waveSprite.color;
         waveColor.a = 1.0f;
         waveSprite.color = waveColor;
-        pWaveClear [(int)WAVECLEAR.WAVE].transform.position = new Vector3 (waveStartPos - 0.2f,0.0f,0.0f);
+        pWaveClear [(int)WAVECLEAR.BATTLE].transform.position = new Vector3 (waveStartPos - 0.6f,0.0f,0.0f);
 
-
-        SpriteRenderer nowSprite = pWaveClear [nowWave + 3].GetComponent<SpriteRenderer> ();
+        //数字
+        SpriteRenderer nowSprite = numList [nowWave].GetComponent<SpriteRenderer> ();
         var nowColor = nowSprite.color;
-        nowColor.a = 1.0f;
+        nowColor.a = numeratorAlpha;
         nowSprite.color = nowColor;
-        pWaveClear [nowWave + 3].transform.position = new Vector3 (waveStartPos + 1.2f,0.0f,0.0f);
+        numList[nowWave].transform.position = new Vector3 (waveStartPos + 1.0f,0.15f,0.0f);
+        //pWaveClear [nowWave + 3].transform.position = new Vector3 (waveStartPos + 1.0f,0.15f,0.0f);
+
+        //スラッシュ
+        SpriteRenderer slashSprite = pWaveClear [(int)WAVECLEAR.SLASH].GetComponent<SpriteRenderer> ();
+        var slashColor = slashSprite.color;
+        slashColor.a = 1.0f;
+        slashSprite.color = slashColor;
+        pWaveClear [(int)WAVECLEAR.SLASH].transform.position = new Vector3 (waveStartPos + 1.4f,0.0f,0.0f);
+
+
+
+        //数値　母数
+        SpriteRenderer maxSprite = pWaveClear [SelectStageList.Count + 3].GetComponent<SpriteRenderer> ();
+        var maxColor = maxSprite.color;
+        maxColor.a = 1.0f;
+        maxSprite.color = maxColor;
+        pWaveClear [SelectStageList.Count + 3].transform.position = new Vector3 (waveStartPos + 1.9f,-0.15f,0.0f);
+
+
+        //現在のステージ数管理
+        SpriteRenderer stageSprite = pWaveClear[(int)WAVECLEAR.STAGE].GetComponent<SpriteRenderer>();
+        var stageColor = stageSprite.color;
+        stageColor.a = 1.0f;
+        stageSprite.color = stageColor;
+        pWaveClear[(int)WAVECLEAR.STAGE].transform.position = new Vector3 (waveStartPos - 0.25f,1.0f,0.0f);
+        //0
+        SpriteRenderer zeroSprite = stageNumList[0].GetComponent<SpriteRenderer>();
+        var zeroColor = zeroSprite.color;
+        zeroColor.a = 1.0f;
+        zeroSprite.color = zeroColor;
+        stageNumList[0].transform.position = new Vector3 (waveStartPos + 0.55f,1.0f,0.0f);
+
+        //Stage
+        SpriteRenderer nowStageSprite = stageNumList[nowStage + 1].GetComponent<SpriteRenderer>();
+        var nowStageColor = nowStageSprite.color;
+        nowStageColor.a = 1.0f;
+        nowStageSprite.color = nowStageColor;
+        stageNumList[nowStage + 1].transform.position = new Vector3 (waveStartPos + 0.85f,1.0f,0.0f);
+
+
+
+
+
+
+
+        //背景の黒画像
+        SpriteRenderer backSprite = pWaveClear[(int)WAVECLEAR.BACKBLACK].GetComponent<SpriteRenderer>();
+        var backColor = backSprite.color;
+        backColor.a = waveStartAlpha;
+        backSprite.color = backColor;
+
+
+
+
 
 
         if(waveStartPos < -10.0f)
         {
             isWaveStart = false;
         }
-        Debug.Log(waveStartPos);
+        //Debug.Log(waveStartPos);
     }
 
 
