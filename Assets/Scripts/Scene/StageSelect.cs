@@ -18,11 +18,14 @@ public class StageSelect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
 
     public void ButtonTap(int _Stage)
     {
+       
+
         //フェード処理 
         PlayerPrefs.SetInt("StageSelect", _Stage);
 

@@ -8,7 +8,9 @@ public class Title : MonoBehaviour
 {
     private AudioSource _audioSource;
     public Text pTapStartText;
+    public float delayTime = 2.0f;
     float textAlpha = 1.0f;
+
 
     bool isAlphaUp = false;
 
@@ -21,6 +23,8 @@ public class Title : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        delayTime -= Time.deltaTime;
+
         if (isAlphaUp == false)
         {
             textAlpha -= 0.01f;
@@ -47,6 +51,9 @@ public class Title : MonoBehaviour
 
     void ChackTap()
     {
+        if(delayTime > 0.0f)return;
+
+
         if (Input.GetMouseButtonDown(0))
         {
             _audioSource.Play();

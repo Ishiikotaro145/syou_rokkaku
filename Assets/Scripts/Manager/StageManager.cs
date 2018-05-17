@@ -61,6 +61,7 @@ public class StageManager : SingletonBase<StageManager>
     int maxWaveCnt = 0;
 
 
+
 //    private bool enemyPassable;
 
     //WAVE STARTの表示に必要なもの
@@ -122,11 +123,6 @@ public class StageManager : SingletonBase<StageManager>
         isWaveStart = true;
         waveStartPos = -10.0f;
         isWaveStartBay = false;
-
-
-
-
-
     }
 
 
@@ -439,97 +435,24 @@ public class StageManager : SingletonBase<StageManager>
     }
 
 
-//    // Update is called once per frame
-//    void Update()
-//    {
-//        if (EnemyManager.GetInstance.GetNowEnemyCnt() <= 0)
-//        {
-//            if (nowWave >= maxWaveCnt)
-//            {
-//                //ステージクリア
-//            }
-//            else
-//            {
-//                //次のWAVEの敵を出す。
-//                GameObject stageObject = (GameObject) Instantiate
-//                (
-//                    SelectStageList[nowWave],
-//                    transform.position,
-//                    Quaternion.identity
-//                );
-//                nowWave++;
-//
-////                Debug.Log ("Waveエネミー生成完了");
-//            }
-//        }
-//    }
-
     void NextWave()
     {
+
+
+
         //次のWAVEの敵を出す。
+
         allEnemyInStage = Instantiate
-        (
-            SelectStageList[nowWave],
-            transform.position,
-            Quaternion.identity
-        );
-//        if (enemyPassable)
-//        {
-//            EnemyBase[] enemyBases = allEnemyInStage.transform.GetComponentsInChildren<EnemyBase>();
-//            foreach (var enemy in enemyBases)
-//            {
-//                enemy.TriggerPassableWhenNecessary();
-//            }
-//        }
-        //Debug.Log ("WAVEStart!!!!!!!!");
+            (
+                SelectStageList[nowWave],
+                transform.position,
+                Quaternion.identity
+            );
         nowWave++;
         SetWaveStart ();
-//              Debug.Log ("Waveエネミー生成完了");
+ 
     }
 
-//    public void TriggerEnemyPassable()
-//    {
-//        if (enemyPassable)
-//        {
-//            StopCoroutine("RestorePassable");
-//            StartCoroutine("RestorePassable");
-//            return;
-//        }
-//
-//        enemyPassable = true;
-//        if (allEnemyInStage != null)
-//        {
-//            EnemyBase[] enemyBases = allEnemyInStage.transform.GetComponentsInChildren<EnemyBase>();
-//            foreach (var enemy in enemyBases)
-//            {
-//                enemy.TriggerPassableWhenNecessary();
-//            }
-//        }
-//
-//        StartCoroutine("RestorePassable");
-//    }
-//
-//    IEnumerator RestorePassable()
-//    {
-//        yield return new WaitForSeconds(2);
-//        RestorePassableImmediately();
-//    }
-//
-//    public void RestorePassableImmediately()
-//    {
-//        if (!enemyPassable) return;
-//        if (allEnemyInStage != null)
-//        {
-//            EnemyBase[] enemyBases = allEnemyInStage.transform.GetComponentsInChildren<EnemyBase>();
-//            foreach (var enemy in enemyBases)
-//            {
-//                enemy.TriggerPassableWhenNecessary();
-//            }
-//        }
-//
-//        BallScript.instance.SetPassable(false);
-//        enemyPassable = false;
-//    }
 
     void StageCopy(List<GameObject> _stageP)
     {

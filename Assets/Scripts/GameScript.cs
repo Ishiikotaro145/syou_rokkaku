@@ -119,6 +119,8 @@ public class GameScript : MonoBehaviour
 
     public void WaveClear()
     {
+
+
 //        StageManager.GetInstance.SetWaveClear();  
         _audioSource.PlayOneShot(WaveClearA, 5);
         speed = playerInstance.GetCurrentSpeed();

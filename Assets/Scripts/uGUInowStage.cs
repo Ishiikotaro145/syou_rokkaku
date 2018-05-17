@@ -18,8 +18,10 @@ public class uGUInowStage : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		int nowStage = StageManager.GetInstance.GetNowStage();
 
+
+		int nowStage = StageManager.GetInstance.GetNowStage();
+		if(nowStage >= 9)return;
 		for (int cnt = 0; cnt < nowStageList.Count; cnt++)
 		{
 			Image numImage = nowStageList [cnt].GetComponent<Image> ();

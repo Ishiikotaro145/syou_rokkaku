@@ -34,6 +34,12 @@ public class ChangeBackSprite : MonoBehaviour
             audioSource.clip = bgm[2];
             audioSource.Play();
         }
+        else
+        {
+            sprite = pBackSpritePrefab[2].GetComponent<SpriteRenderer>();
+            audioSource.clip = bgm[2];
+            audioSource.Play();        
+        }
 
         var color = sprite.color;
         color.a = 1.0f;
