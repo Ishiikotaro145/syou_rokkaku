@@ -317,7 +317,7 @@ MonoBehaviour:
   Slash: {fileID: 1931391723872664, guid: 8690041cf7250174eb66ceb76d6bf32a, type: 2}
   LaserPrefab: {fileID: 1812881953744270, guid: ed0c022a338d3384d9ee622d354a94e2,
     type: 2}
-  maxSpeed: 8
+  maxSpeed: 6
 --- !u!212 &212599908546116372
 SpriteRenderer:
   m_ObjectHideFlags: 1

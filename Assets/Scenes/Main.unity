@@ -3588,6 +3588,34 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1346108686}
+--- !u!1 &1346369817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1346369818}
+  m_Layer: 0
+  m_Name: stage4-1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1346369818
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1346369817}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1365630184
 GameObject:
   m_ObjectHideFlags: 0
@@ -4321,7 +4349,7 @@ MonoBehaviour:
   - {fileID: 1535159025749882, guid: eb124084851af4b358d98fe42b89392f, type: 2}
   - {fileID: 1995949692709120, guid: 165385256d8ed4b3aaa2c041b507652c, type: 2}
   pStage3_1:
-  - {fileID: 1782399578861092, guid: 1f449ab6da4d64450aaf1270b3c73823, type: 2}
+  - {fileID: 1858221008297354, guid: c5bd5e0b1fb3a4db6b7079a6fb2f37ec, type: 2}
   - {fileID: 1272185989856808, guid: 996f15b37addd4bee8b27d1088455cde, type: 2}
   - {fileID: 1782399578861092, guid: 1f449ab6da4d64450aaf1270b3c73823, type: 2}
   pStage3_2:
