@@ -25,6 +25,8 @@ public class BallScript : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private AudioSource _audioSource;
 
+    private float lastTimeHitEnemy;
+
     private void Start()
     {
         instance = this;
@@ -38,6 +40,7 @@ public class BallScript : MonoBehaviour
     {
         currentSpeed = speed;
         _rigidbody2D.velocity = Vector2.up * currentSpeed;
+        lastTimeHitEnemy = Time.time;
         gameStart = true;
     }
 public void GameStop(){
@@ -59,7 +62,8 @@ public void GameStop(){
 
             if (enemyBase.HitByPlayer(_rigidbody2D.velocity))
                 Instantiate(Slash, o.transform.position, Quaternion.identity);
-
+            lastTimeHitEnemy = Time.time;
+            GuideLines.instance.RemoveAll();
             // StopCoroutine("SlowDown");
             // StartCoroutine("SlowDown", 0.4f);
             // currentSpeed += .06f;
@@ -91,9 +95,10 @@ public void GameStop(){
 
             if (enemyBase.HitByPlayer(_rigidbody2D.velocity))
                 Instantiate(Slash, o.transform.position, Quaternion.identity);
-
+            lastTimeHitEnemy = Time.time;
+            GuideLines.instance.RemoveAll();
             // StopCoroutine("SlowDown");
-            // StartCoroutine("SlowDown", 0.ß2f);
+            // StartCoroutine("SlowDown", 0.2f);
             // currentSpeed += .09f;
             // if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
             // _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
@@ -102,7 +107,7 @@ public void GameStop(){
         {
             o.gameObject.GetComponent<WallScript>().Hit(currentSpeed);
             _audioSource.PlayOneShot(JumpA);
-            currentSpeed += 0.3f;
+            currentSpeed += 0.1f;
             if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
             _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * currentSpeed;
         }
@@ -114,9 +119,9 @@ public void GameStop(){
         transform.rotation = Quaternion.FromToRotation(Vector3.right, _rigidbody2D.velocity);
 
         // Guide Line
-
+        if (Time.time - lastTimeHitEnemy < 3) return;
         GuideLines.instance.RemoveAll();
-        float remainLength = 0f;
+        float remainLength = 5f;
         Vector2 lineSpeed = _rigidbody2D.velocity;
         Vector2 linePosition = transform.position;
         RaycastHit2D[] lineHits = Physics2D.CircleCastAll(linePosition, BallSize, lineSpeed, remainLength, 1 << 9);

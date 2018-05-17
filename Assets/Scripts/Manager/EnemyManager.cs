@@ -34,8 +34,16 @@ public class EnemyManager : SingletonBase<EnemyManager>
         nowEnemyCnt--;
         if (nowEnemyCnt == 0)
         {
-//            GameScript.instance.WaveClear();
-            StageManager.GetInstance.SetWaveClear();
+StageManager.GetInstance.SetWaveClear();
+            // StartCoroutine("SlowDown",0.1f); 
         }
+    }
+    
+    IEnumerator SlowDown(float scale)
+    { 
+        Time.timeScale = scale;
+        yield return new WaitForSeconds(.1f);
+        Time.timeScale = 1f;
+        StageManager.GetInstance.SetWaveClear();
     }
 }

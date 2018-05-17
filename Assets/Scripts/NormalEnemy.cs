@@ -12,7 +12,7 @@ public class NormalEnemy : EnemyBase
 //        Debug.Log("Damage");
         //HP減らす処理 
         currentHP--;
-        hpBar.localScale = new Vector2(0.08f * currentHP / hp, 0.12f);
+        hpBar.localScale = new Vector2(3f * currentHP / hp, 3f);
         if (currentHP == 0)
         {
             GetComponent<CircleCollider2D>().enabled = false; 
