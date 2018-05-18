@@ -7,7 +7,7 @@ public class WallScript : MonoBehaviour
     public Sprite[] Sprites;
     public AudioClip broken;
     public GameObject ParticlePrefab;
-    public GameObject Animation;
+    // public GameObject Animation;
 
     public float[] SpritePercentages = new[] {.85f, .7f, .45f, .3f, .15f};
     public float BlinkPercentage = .1f;
@@ -39,9 +39,9 @@ public class WallScript : MonoBehaviour
         if (currentHP == 0)
         {
             AudioScript.instance.PlayOneShot(broken,5);
-            Instantiate(ParticlePrefab,transform.position,Quaternion.identity);
+            ParticlePrefab.SetActive(true);
             gameObject.SetActive(false);
-            Animation.SetActive(true);
+            // Animation.SetActive(true);
             return true;
         }
 
@@ -68,10 +68,11 @@ public class WallScript : MonoBehaviour
 
     public void Recover()
     {
-        if (!gameObject.active) gameObject.SetActive(true);
+        if (!gameObject.active){gameObject.SetActive(true);
+            ParticlePrefab.SetActive(false);}
         currentHP = MaxHp;
         _spriteRenderer.sprite = Sprites[0];
         _animator.SetBool("Blink", false);
-        Animation.SetActive(false);
+        // Animation.SetActive(false);
     }
 }

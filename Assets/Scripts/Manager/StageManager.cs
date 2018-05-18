@@ -33,6 +33,9 @@ enum WAVECLEAR : int
     SLASH,
     BACKBLACK,
     STAGE,
+    ORANGE_SHADOW,
+    HEX1,
+    HEX2,
 }
 
 
@@ -165,7 +168,7 @@ public class StageManager : SingletonBase<StageManager>
                     transform.position,
                     Quaternion.identity
                 );
-            num2.transform.localScale = new Vector3 (0.15f,0.15f,0.15f);
+            num2.transform.localScale = new Vector3 (0.277f,0.277f,0.277f);
             stageNumList.Add (num2);
         }
         waveObject = (GameObject)Instantiate
@@ -217,32 +220,23 @@ public class StageManager : SingletonBase<StageManager>
         sprite.color = color;
         pWaveClear[(int) WAVECLEAR.BACK_OVERRAY].transform.localScale = new Vector3(20.0f, 2.0f - overScale, 1.0f);
 
-        //WAVE CLEAR
-
-        
-
-
+        //BATTLE
         SpriteRenderer waveSprite = waveObject.GetComponent<SpriteRenderer>();
         var waveColor = waveSprite.color;
         waveColor.a = 1.0f - overAlpha;
         waveSprite.color = waveColor;
-        waveObject.transform.position = new Vector3(-1.37f - (waveClearPosXConst - waveClearPosX), 0.0f, 0.0f);
+        waveObject.transform.position = new Vector3(-0.9f - (waveClearPosXConst - waveClearPosX), 0.0f, 0.0f);
 
 
-
+        //CLEAR
         SpriteRenderer clearSprite = pWaveClear[(int) WAVECLEAR.CLEAR].GetComponent<SpriteRenderer>();
         var clearColor = clearSprite.color;
         clearColor.a = 1.0f - overAlpha;
         clearSprite.color = clearColor;
         pWaveClear[(int) WAVECLEAR.CLEAR].transform.position =
-            new Vector3(1.54f + (waveClearPosXConst - waveClearPosX), 0.0f, 0.0f);
+            new Vector3(1.14f + (waveClearPosXConst - waveClearPosX), 0.0f, 0.0f);
 
-        SpriteRenderer nowSprite = pWaveClear[nowWave + 3].GetComponent<SpriteRenderer>();
-        var nowColor = nowSprite.color;
-        nowColor.a = 1.0f - overAlpha;
-        nowSprite.color = nowColor;
 
-        pWaveClear[nowWave + 3].transform.position = new Vector3(0.0f, 0.0f, 0.0f);
 
 
         if (waveClearTime >= 150)
@@ -309,57 +303,60 @@ public class StageManager : SingletonBase<StageManager>
         var waveColor = waveSprite.color;
         waveColor.a = 1.0f;
         waveSprite.color = waveColor;
-        pWaveClear [(int)WAVECLEAR.BATTLE].transform.position = new Vector3 (waveStartPos - 0.6f,0.0f,0.0f);
-
-        //数字
-        SpriteRenderer nowSprite = numList [nowWave].GetComponent<SpriteRenderer> ();
-        var nowColor = nowSprite.color;
-        nowColor.a = numeratorAlpha;
-        nowSprite.color = nowColor;
-        numList[nowWave].transform.position = new Vector3 (waveStartPos + 1.0f,0.15f,0.0f);
-        //pWaveClear [nowWave + 3].transform.position = new Vector3 (waveStartPos + 1.0f,0.15f,0.0f);
-
-        //スラッシュ
-        SpriteRenderer slashSprite = pWaveClear [(int)WAVECLEAR.SLASH].GetComponent<SpriteRenderer> ();
-        var slashColor = slashSprite.color;
-        slashColor.a = 1.0f;
-        slashSprite.color = slashColor;
-        pWaveClear [(int)WAVECLEAR.SLASH].transform.position = new Vector3 (waveStartPos + 1.4f,0.0f,0.0f);
+        pWaveClear [(int)WAVECLEAR.BATTLE].transform.position = new Vector3 (waveStartPos - 0.8f,0.0f,0.0f);
 
 
-
-        //数値　母数
-        SpriteRenderer maxSprite = pWaveClear [SelectStageList.Count + 3].GetComponent<SpriteRenderer> ();
-        var maxColor = maxSprite.color;
-        maxColor.a = 1.0f;
-        maxSprite.color = maxColor;
-        pWaveClear [SelectStageList.Count + 3].transform.position = new Vector3 (waveStartPos + 1.9f,-0.15f,0.0f);
-
-
-        //現在のステージ数管理
-        SpriteRenderer stageSprite = pWaveClear[(int)WAVECLEAR.STAGE].GetComponent<SpriteRenderer>();
-        var stageColor = stageSprite.color;
-        stageColor.a = 1.0f;
-        stageSprite.color = stageColor;
-        pWaveClear[(int)WAVECLEAR.STAGE].transform.position = new Vector3 (waveStartPos - 0.25f,1.0f,0.0f);
-        //0
-        SpriteRenderer zeroSprite = stageNumList[0].GetComponent<SpriteRenderer>();
-        var zeroColor = zeroSprite.color;
-        zeroColor.a = 1.0f;
-        zeroSprite.color = zeroColor;
-        stageNumList[0].transform.position = new Vector3 (waveStartPos + 0.55f,1.0f,0.0f);
 
         //Stage
         SpriteRenderer nowStageSprite = stageNumList[nowStage + 1].GetComponent<SpriteRenderer>();
         var nowStageColor = nowStageSprite.color;
         nowStageColor.a = 1.0f;
         nowStageSprite.color = nowStageColor;
-        stageNumList[nowStage + 1].transform.position = new Vector3 (waveStartPos + 0.85f,1.0f,0.0f);
+        stageNumList[nowStage + 1].transform.position = new Vector3 (waveStartPos + 0.7f,0.0f,0.0f);
+
+
+        //スラッシュ
+        SpriteRenderer slashSprite = pWaveClear [(int)WAVECLEAR.SLASH].GetComponent<SpriteRenderer> ();
+        var slashColor = slashSprite.color;
+        slashColor.a = 1.0f;
+        slashSprite.color = slashColor;
+        pWaveClear [(int)WAVECLEAR.SLASH].transform.position = new Vector3 (waveStartPos + 1.2f,0.0f,0.0f);
+
+
+        //数字
+        SpriteRenderer nowSprite = numList [nowWave].GetComponent<SpriteRenderer> ();
+        var nowColor = nowSprite.color;
+        nowColor.a = numeratorAlpha;
+        nowSprite.color = nowColor;
+        numList[nowWave].transform.position = new Vector3 (waveStartPos + 1.7f,0.0f,0.0f);
+        //pWaveClear [nowWave + 3].transform.position = new Vector3 (waveStartPos + 1.0f,0.15f,0.0f);
 
 
 
 
 
+
+        //OrangeShadow
+        SpriteRenderer orangeShadowSprite = pWaveClear[(int)WAVECLEAR.ORANGE_SHADOW].GetComponent<SpriteRenderer>();
+        var orangeShadowColor = orangeShadowSprite.color;
+        orangeShadowColor.a = 0.7f;
+        orangeShadowSprite.color = orangeShadowColor;
+        pWaveClear[(int)WAVECLEAR.ORANGE_SHADOW].transform.position = new Vector3 (waveStartPos,0.0f,0.0f);
+
+
+        //HEX
+        SpriteRenderer hexSprite = pWaveClear[(int)WAVECLEAR.HEX1].GetComponent<SpriteRenderer>();
+        var hexColor = hexSprite.color;
+        hexColor.a = 0.7f;
+        hexSprite.color = hexColor;
+        pWaveClear[(int)WAVECLEAR.HEX1].transform.position = new Vector3 (waveStartPos - 2.5f,0.0f,0.0f);
+
+
+        SpriteRenderer hex2Sprite = pWaveClear[(int)WAVECLEAR.HEX2].GetComponent<SpriteRenderer>();
+        var hex2Color = hex2Sprite.color;
+        hex2Color.a = 0.7f;
+        hex2Sprite.color = hex2Color;
+        pWaveClear[(int)WAVECLEAR.HEX2].transform.position = new Vector3 (waveStartPos + 2.5f,0.0f,0.0f);
 
 
         //背景の黒画像

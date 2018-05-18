@@ -124,7 +124,7 @@ public void GameStop(){
         transform.rotation = Quaternion.FromToRotation(Vector3.right, _rigidbody2D.velocity);
 
         // Guide Line
-        if (Time.time - lastTimeHitEnemy < 3) return;
+        if (Time.time - lastTimeHitEnemy < 6) return;
         GuideLines.instance.RemoveAll();
         float remainLength = 5f;
         Vector2 lineSpeed = _rigidbody2D.velocity;

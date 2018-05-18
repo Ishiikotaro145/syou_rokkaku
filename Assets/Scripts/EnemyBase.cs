@@ -36,7 +36,7 @@ public abstract class EnemyBase : MonoBehaviour
         EnemyManager.GetInstance.TellSpawn();
         currentHP = hp;
         hpBar = transform.GetChild(1);
-        if (hp == 1)
+        // if (hp == 1)
         {
             transform.GetChild(0).gameObject.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(false);

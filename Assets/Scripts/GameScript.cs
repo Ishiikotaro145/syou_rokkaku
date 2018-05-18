@@ -17,7 +17,7 @@ public class GameScript : MonoBehaviour
     public AudioClip GameOverA;
     public AudioClip StageClearA;
     public GameObject ItemPrefab;
-    public float ItemTime = 20;
+    public float ItemTime = 10;
 
 //    public GameObject chargeBar;
     public GameObject tapToStart;
@@ -44,7 +44,7 @@ public class GameScript : MonoBehaviour
 
     private AudioSource _audioSource;
 
-    private int itemCount = 1;
+    private int itemCount = 0;
 //    private Image chargeBarImage;
 
     void Awake()
@@ -218,9 +218,10 @@ public class GameScript : MonoBehaviour
 //        playerInstance = Instantiate(player, new Vector2(0, -2f), Quaternion.identity).GetComponent<BallScript>();
         playerInstance.GameStart(speed);
         StoveScript.instance.GameStart();
-        if (itemCount == 0) yield break;
+        if (itemCount == 0){itemCount++;yield break;} 
+        else if(itemCount == 1)
         yield return new WaitForSeconds(ItemTime);
-        Instantiate(ItemPrefab, new Vector2(Random.value * 4 - 2, Random.value * 4 - 2), Quaternion.identity);
+        Instantiate(ItemPrefab, new Vector2(0,startYusyaPositionY), Quaternion.identity);
         itemCount--;
     }
 
@@ -246,7 +247,7 @@ public class GameScript : MonoBehaviour
     }
 
     public void NextStage()
-    {
+    {if(PlayerPrefs.GetInt("StageSelect", 0)==8)return;
         PlayerPrefs.SetInt("StageSelect", PlayerPrefs.GetInt("StageSelect", 0) + 1);
         Time.timeScale = 1;
         SceneManager.LoadScene("Main");
